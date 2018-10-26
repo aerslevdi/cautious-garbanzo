@@ -6,141 +6,151 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".PerfilPelicula">
+
         <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            >
-
-            <ImageView
-                android:id="@+id/imagenVideo"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/videoimg" />
-
+             >
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tituloPelicula"
+                <ImageView
+                    android:id="@+id/imagenVideo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="250dp"
-                    android:text="@string/tituloPelicula"
-                    android:textColor="#000000"
-                    android:textSize="30sp" />
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/videoimg" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:text="@string/genero"
-                    android:id="@+id/genero"
-                    android:layout_below="@id/tituloPelicula"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:text="@string/duracion"
-                    android:id="@+id/duracion"
-                    android:layout_toRightOf="@id/genero"
-                    android:layout_below="@id/tituloPelicula"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fecha"
-                    android:id="@+id/fecha"
-                    android:layout_toRightOf="@id/duracion"
-                    android:layout_below="@id/tituloPelicula"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rating"
-                    android:layout_marginTop="15dp"
-                    android:layout_below="@id/genero"
-                    android:src="@drawable/ic_star_border_black_24dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ratingNumero"
-                    android:layout_alignRight="@id/rating"
-                    android:layout_alignLeft="@id/rating"
-                    android:textAlignment="center"
-                    android:text="8/10"
-                    android:layout_below="@id/rating"/>
-
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/score"
-                    android:layout_marginTop="15dp"
-                    android:layout_toRightOf="@id/rating"
-                    android:layout_below="@id/duracion"
-                    android:src="@drawable/ic_thumbs_up_down_black_24dp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/scoreMeta"
-                    android:layout_alignRight="@id/score"
-                    android:layout_alignLeft="@id/score"
-                    android:textAlignment="center"
-                    android:text="68"
-                    android:layout_below="@id/rating"/>
-
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/awards"
-                    android:layout_marginTop="15dp"
-                    android:layout_below="@id/fecha"
-                    android:layout_toRightOf="@id/score"
-                    android:src="@drawable/ic_spa_black_24dp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/premiosNumero"
-                    android:layout_alignRight="@id/awards"
-                    android:layout_alignLeft="@id/awards"
-                    android:textAlignment="center"
-                    android:text="8/10"
-                    android:layout_below="@id/rating"/>
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_below="@id/scoreMeta"
-                    android:id="@+id/buttonFrame">
-                    <Button
-                        android:layout_width="300dp"
+                    <TextView
+                        android:id="@+id/tituloPelicula"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/ratingButton"
-                        android:id="@+id/ratingButton"/>
-                </FrameLayout>
-            </RelativeLayout>
+                        android:layout_marginTop="250dp"
+                        android:text="@string/tituloPelicula"
+                        android:textColor="#000000"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/genero"
+                        android:id="@+id/genero"
+                        android:layout_below="@id/tituloPelicula"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/duracion"
+                        android:id="@+id/duracion"
+                        android:layout_toRightOf="@id/genero"
+                        android:layout_below="@id/tituloPelicula"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fecha"
+                        android:id="@+id/fecha"
+                        android:layout_toRightOf="@id/duracion"
+                        android:layout_below="@id/tituloPelicula"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rating"
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@id/genero"
+                        android:src="@drawable/ic_star_border_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ratingNumero"
+                        android:layout_alignRight="@id/rating"
+                        android:layout_alignLeft="@id/rating"
+                        android:textAlignment="center"
+                        android:text="8/10"
+                        android:layout_below="@id/rating"/>
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/score"
+                        android:layout_marginTop="15dp"
+                        android:layout_toRightOf="@id/rating"
+                        android:layout_below="@id/duracion"
+                        android:src="@drawable/ic_thumbs_up_down_black_24dp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/scoreMeta"
+                        android:layout_alignRight="@id/score"
+                        android:layout_alignLeft="@id/score"
+                        android:textAlignment="center"
+                        android:text="68"
+                        android:layout_below="@id/rating"/>
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/awards"
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@id/fecha"
+                        android:layout_toRightOf="@id/score"
+                        android:src="@drawable/ic_spa_black_24dp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/premiosNumero"
+                        android:layout_alignRight="@id/awards"
+                        android:layout_alignLeft="@id/awards"
+                        android:textAlignment="center"
+                        android:text="8/10"
+                        android:layout_below="@id/rating"/>
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@id/scoreMeta"
+                        android:id="@+id/buttonFrame">
+                        <Button
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ratingButton"
+                            android:id="@+id/ratingButton"/>
+                    </FrameLayout>
+                </RelativeLayout>
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:id="@+id/toolbar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+
+                >
+
+            </android.support.v7.widget.Toolbar>
+
+
         </android.support.design.widget.CollapsingToolbarLayout>
 
 
-
+    {
         <android.support.v7.widget.RecyclerView
             android:id="@+id/actoresRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="450dp">
-
+            android:layout_marginTop="450dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
         </android.support.v7.widget.RecyclerView>
 
 
