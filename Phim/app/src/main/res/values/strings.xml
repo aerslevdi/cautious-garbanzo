@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Phim</string>
-    <string name="tituloPelicula">Infinity Wars (2018)</string>
-    <string name="genero">Superheroes</string>
-    <string name="duracion">1:29 hs</string>
-    <string name="fecha">26 Abr 2018</string>
-    <string name="ratingButton">Agregar rating</string>
-</resources>
