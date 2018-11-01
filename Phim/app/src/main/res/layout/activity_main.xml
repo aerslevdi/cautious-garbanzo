@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.wpenia.phim.MainActivity"
+    android:orientation="vertical"
+    android:background="#9c94d0"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/phim" />
+
+
+
+    <Button
+        android:id="@+id/btnInfantiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Infantiles" />
+
+
+    <Button
+        android:id="@+id/btnAdultos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adultos" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="clockwise"
+        android:id="@+id/button2"
+        android:onClick="zoom"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="blink"
+        android:onClick="blink"
+        android:id="@+id/button4"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="move"
+        android:onClick="move"
+        android:id="@+id/button5" />
+
+</LinearLayout>
