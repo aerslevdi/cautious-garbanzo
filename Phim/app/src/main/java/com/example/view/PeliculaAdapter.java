@@ -1,4 +1,4 @@
-package com.example.wpenia.phim;
+package com.example.view;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.model.Pelicula;
+import com.example.wpenia.phim.R;
 
 import java.util.List;
 

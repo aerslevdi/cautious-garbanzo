@@ -1,4 +1,4 @@
-package com.example.digital.phim;
+package com.example.model;
 
 public class ActorDetalle {
     //ATRIBUTOS

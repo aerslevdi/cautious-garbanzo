@@ -1,4 +1,4 @@
-package com.example.digital.phim;
+package com.example.view;
 
 
 import android.os.Bundle;

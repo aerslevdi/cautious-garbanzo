@@ -1,10 +1,12 @@
-package com.example.wpenia.phim;
+package com.example.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.wpenia.phim.R;
 
 public class Main2Activity extends AppCompatActivity {
     public static final String KEY_NOMBRE="nombre";

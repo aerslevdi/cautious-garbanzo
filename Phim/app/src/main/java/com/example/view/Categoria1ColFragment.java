@@ -1,4 +1,4 @@
-package com.example.wpenia.phim;
+package com.example.view;
 
 
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dao.Categoria;
+import com.example.model.Pelicula;
+import com.example.wpenia.phim.R;
 
 import java.util.ArrayList;
 import java.util.List;

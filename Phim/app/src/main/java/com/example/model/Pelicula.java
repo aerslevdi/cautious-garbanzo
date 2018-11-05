@@ -1,4 +1,4 @@
-package com.example.wpenia.phim;
+package com.example.model;
 
 public class Pelicula {
     private String nombre;

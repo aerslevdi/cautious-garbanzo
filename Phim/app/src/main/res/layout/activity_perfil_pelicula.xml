@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".PerfilPelicula">
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.CollapsingToolbarLayout
         android:layout_width="match_parent"
@@ -29,7 +28,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="250dp"
-                android:text="@string/tituloPelicula"
                 android:textColor="#000000"
                 android:textSize="30sp" />
 
@@ -37,7 +35,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
-                android:text="@string/genero"
                 android:id="@+id/genero"
                 android:layout_below="@id/tituloPelicula"
                 android:textSize="15sp" />
@@ -46,7 +43,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
-                android:text="@string/duracion"
                 android:id="@+id/duracion"
                 android:layout_toRightOf="@id/genero"
                 android:layout_below="@id/tituloPelicula"
@@ -55,7 +51,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fecha"
                 android:id="@+id/fecha"
                 android:layout_toRightOf="@id/duracion"
                 android:layout_below="@id/tituloPelicula"
@@ -127,7 +122,6 @@
                 <Button
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/ratingButton"
                     android:id="@+id/ratingButton"/>
             </FrameLayout>
         </RelativeLayout>

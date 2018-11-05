@@ -1,5 +1,8 @@
-package com.example.wpenia.phim;
+package com.example.dao;
 
+
+import com.example.model.Pelicula;
+import com.example.wpenia.phim.R;
 
 import java.util.ArrayList;
 import java.util.List;

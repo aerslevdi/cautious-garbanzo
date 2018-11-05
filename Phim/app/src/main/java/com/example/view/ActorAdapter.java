@@ -1,4 +1,4 @@
-package com.example.digital.phim;
+package com.example.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.model.ActorDetalle;
 import com.example.wpenia.phim.R;
 
 import java.util.List;
