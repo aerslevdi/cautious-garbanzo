@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.dao.Categoria;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +19,10 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Categoria1ColFragment extends Fragment  implements PeliculaAdapter.Receptor  {
+public class Categoria2ColFragment extends Fragment implements PeliculaAdapter.Receptor {
 
 
-    public Categoria1ColFragment() {
+    public Categoria2ColFragment() {
         // Required empty public constructor
     }
 
@@ -29,13 +31,12 @@ public class Categoria1ColFragment extends Fragment  implements PeliculaAdapter.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View view = inflater.inflate(R.layout.fragment_categoria1_col, container, false);
+        View view = inflater.inflate(R.layout.fragment_categoria2_col, container, false);
         Bundle bundle = getArguments();
         String categoria = bundle.getString("categoria");
         Integer columnas = bundle.getInt("columnas");
 
-        RecyclerView recyclerViewPantalla= view.findViewById(R.id.recyclerViewCategoria1);
+        RecyclerView recyclerViewPantalla= view.findViewById(R.id.recyclerViewCategoria);
         Categoria categorias = new Categoria();
         List<Pelicula> peliculas = new ArrayList();
         switch (categoria){
@@ -57,17 +58,23 @@ public class Categoria1ColFragment extends Fragment  implements PeliculaAdapter.
         //recyclerViewPantalla.setLayoutManager(layoutManager);
 
         // Grid Layout Manager
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(container.getContext(), 1);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(container.getContext(), columnas);
         recyclerViewPantalla.setLayoutManager(mGridLayoutManager);
 
         recyclerViewPantalla.setHasFixedSize(true);
 
         return view;
-
-
-
-
     }
+
+    /*private void reemplazarFragment(Fragment fragment){
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
+    }*/
+
+
+
 
     @Override
     public void recibir(Pelicula pelicula) {

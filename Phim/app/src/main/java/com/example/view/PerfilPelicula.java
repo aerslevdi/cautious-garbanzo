@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.wpenia.phim.R;
+
 import java.util.ArrayList;
 import java.util.List;
 

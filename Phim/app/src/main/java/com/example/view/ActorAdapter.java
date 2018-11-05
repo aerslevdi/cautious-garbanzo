@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.wpenia.phim.R;
+
 import java.util.List;
 
 public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ActorViewHolder>{

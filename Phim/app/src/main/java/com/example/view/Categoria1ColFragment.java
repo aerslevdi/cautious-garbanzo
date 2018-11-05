@@ -4,14 +4,13 @@ package com.example.wpenia.phim;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.dao.Categoria;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +19,10 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Categoria2ColFragment extends Fragment implements PeliculaAdapter.Receptor {
+public class Categoria1ColFragment extends Fragment  implements PeliculaAdapter.Receptor  {
 
 
-    public Categoria2ColFragment() {
+    public Categoria1ColFragment() {
         // Required empty public constructor
     }
 
@@ -32,12 +31,13 @@ public class Categoria2ColFragment extends Fragment implements PeliculaAdapter.R
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_categoria2_col, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_categoria1_col, container, false);
         Bundle bundle = getArguments();
         String categoria = bundle.getString("categoria");
         Integer columnas = bundle.getInt("columnas");
 
-        RecyclerView recyclerViewPantalla= view.findViewById(R.id.recyclerViewCategoria);
+        RecyclerView recyclerViewPantalla= view.findViewById(R.id.recyclerViewCategoria1);
         Categoria categorias = new Categoria();
         List<Pelicula> peliculas = new ArrayList();
         switch (categoria){
@@ -59,23 +59,17 @@ public class Categoria2ColFragment extends Fragment implements PeliculaAdapter.R
         //recyclerViewPantalla.setLayoutManager(layoutManager);
 
         // Grid Layout Manager
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(container.getContext(), columnas);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(container.getContext(), 1);
         recyclerViewPantalla.setLayoutManager(mGridLayoutManager);
 
         recyclerViewPantalla.setHasFixedSize(true);
 
         return view;
+
+
+
+
     }
-
-    /*private void reemplazarFragment(Fragment fragment){
-        FragmentManager fragmentManager= getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.commit();
-    }*/
-
-
-
 
     @Override
     public void recibir(Pelicula pelicula) {
