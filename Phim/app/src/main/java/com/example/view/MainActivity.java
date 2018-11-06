@@ -1,5 +1,6 @@
 package com.example.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,10 +17,12 @@ import android.widget.ImageView;
 
 import com.example.controller.CategoriasController;
 import com.example.helper.SimpleItemTouchHelperCallBack;
+import com.example.model.Categoria;
 import com.example.theme.ThemeUtils;
 import com.example.wpenia.phim.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CategoriaAdapter.OnItemViewSelected{
+
     public CategoriaAdapter.OnItemViewSelected listener;
     private CategoriaAdapter adapter;
 
@@ -32,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CategoriasController categoriasController=new CategoriasController();
+        Context context = this;
+        this.listener= (CategoriaAdapter.OnItemViewSelected) context;
 
         RecyclerView recyclerView =findViewById(R.id.recyclerViewIncio);
         recyclerView.setHasFixedSize(true);
@@ -47,12 +52,12 @@ public class MainActivity extends AppCompatActivity {
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
 
-        Button btnInfantiles = findViewById(R.id.btnInfantiles);
+        /*Button btnInfantiles = findViewById(R.id.btnInfantiles);
 
-        /*ImageView image = (ImageView)findViewById(R.id.imageView);
+        ImageView image = (ImageView)findViewById(R.id.imageView);
         Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.clockwise);
-        image.startAnimation(animation1);*/
+        image.startAnimation(animation1);
 
         btnInfantiles.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     public void zoom(View view){
@@ -99,6 +104,29 @@ public class MainActivity extends AppCompatActivity {
                 AnimationUtils.loadAnimation(getApplicationContext(),
                         R.anim.blink);
         image.startAnimation(animation1);
+    }
+
+    @Override
+    public void click(Categoria categoria) {
+
+        Intent intent=new Intent(MainActivity.this, CategoriaActivity.class);
+        Bundle bundle = new Bundle();
+        String categoriaSelected="Infantil";
+
+        String categoriaTitulo = categoria.getTitulo();
+        switch (categoriaTitulo) {
+            case "Peliculas":
+                categoriaSelected="Infantil";
+                break;
+            case "Series":
+                categoriaSelected="Adulto";
+                break;
+        }
+
+        bundle.putString("categoria", categoriaSelected);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
     }
 
 }

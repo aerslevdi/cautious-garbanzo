@@ -21,32 +21,32 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.RecetaViewHolder> implements ItemTouchHelperAdapter, Filterable {
+public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.CategoriaViewHolder> implements ItemTouchHelperAdapter, Filterable {
 
-    private List<Categoria> recetasFull;
+    private List<Categoria> categoriaFull;
     private OnItemViewSelected listener;
     private List<Categoria> categorias;
 
 
     public interface OnItemViewSelected {
-        void click(Categoria receta);
+        void click(Categoria categoria);
     }
 
     public CategoriaAdapter(List<Categoria> datos, OnItemViewSelected listener) {
         this.categorias = datos;
-        this.recetasFull = new ArrayList<>(datos);
+        this.categoriaFull = new ArrayList<>(datos);
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public RecetaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public CategoriaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_categoria, viewGroup, false);
-        return new RecetaViewHolder(view);
+        return new CategoriaViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecetaViewHolder recetaViewHolder, int i) {
+    public void onBindViewHolder(@NonNull CategoriaViewHolder recetaViewHolder, int i) {
         Categoria categoria = this.categorias.get(i);
         recetaViewHolder.setDatos(categoria);
     }
@@ -80,13 +80,13 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Rece
         notifyItemRemoved(position);
     }
 
-    public class RecetaViewHolder extends RecyclerView.ViewHolder {
+    public class CategoriaViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView textView;
         private ViewPager viewPager;
 
 
-        public RecetaViewHolder(@NonNull View itemView) {
+        public CategoriaViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imagenCategoria);
             textView = itemView.findViewById(R.id.nombreCategoria);
@@ -98,11 +98,12 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Rece
             });
         }
 
-        public void setDatos(Categoria receta) {
-            imageView.setImageResource(receta.getFoto());
-            textView.setText(receta.getTitulo());
+        public void setDatos(Categoria categoria) {
+            imageView.setImageResource(categoria.getFoto());
+            textView.setText(categoria.getTitulo());
         }
     }
+
 
     @Override
     public Filter getFilter() {
@@ -112,10 +113,10 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Rece
                 List<Categoria> filterList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0) {
-                    filterList.addAll(recetasFull);
+                    filterList.addAll(categoriaFull);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
-                    for (Categoria receta : recetasFull){
+                    for (Categoria receta : categoriaFull){
                         if(receta.getTitulo().toLowerCase().trim().contains(filterPattern)) {
                             filterList.add(receta);
                         }
