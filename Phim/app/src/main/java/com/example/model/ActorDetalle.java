@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.util.List;
+
 public class ActorDetalle {
     //ATRIBUTOS
 
@@ -26,6 +28,9 @@ public class ActorDetalle {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "ActorDetalle{" +
+                "nombre='" + nombre + '\'' +
+                ", imagen=" + imagen +
+                '}';
     }
 }
