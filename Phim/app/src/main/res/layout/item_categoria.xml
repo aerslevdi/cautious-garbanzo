@@ -4,24 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:elevation="5dp"
+    android:elevation="2dp"
     app:cardUseCompatPadding="true"
-    android:padding="5dp">
+    android:padding="2dp">
 
     <ImageView
         android:id="@+id/imagenCategoria"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="300dp" />
 
     <TextView
         android:id="@+id/nombreCategoria"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:textSize="25sp"
+        android:textSize="30sp"
+        android:textColor="@color/colorWhite"
         android:layout_gravity="bottom"
-        android:alpha="0.65"
-        android:background="#FFFFFF"
+        android:alpha="0.75"
+        android:background="#585858"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

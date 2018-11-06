@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 import com.example.controller.CategoriasController;
 import com.example.helper.SimpleItemTouchHelperCallBack;
+import com.example.theme.ThemeUtils;
 import com.example.wpenia.phim.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,8 +25,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        //ThemeUtils.onActivityCreateSetTheme(this);
+        this.setTheme(R.style.GreyTheme);
         setContentView(R.layout.activity_main);
+
         CategoriasController categoriasController=new CategoriasController();
 
         RecyclerView recyclerView =findViewById(R.id.recyclerViewIncio);
@@ -44,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnInfantiles = findViewById(R.id.btnInfantiles);
 
-        ImageView image = (ImageView)findViewById(R.id.imageView);
+        /*ImageView image = (ImageView)findViewById(R.id.imageView);
         Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.clockwise);
-        image.startAnimation(animation1);
+        image.startAnimation(animation1);*/
 
         btnInfantiles.setOnClickListener(new View.OnClickListener() {
             @Override
