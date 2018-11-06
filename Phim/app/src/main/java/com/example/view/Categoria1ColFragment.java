@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.dao.Categoria;
+import com.example.dao.CategoriaDao;
 import com.example.model.Pelicula;
 import com.example.wpenia.phim.R;
 
@@ -40,7 +40,7 @@ public class Categoria1ColFragment extends Fragment  implements PeliculaAdapter.
         Integer columnas = bundle.getInt("columnas");
 
         RecyclerView recyclerViewPantalla= view.findViewById(R.id.recyclerViewCategoria1);
-        Categoria categorias = new Categoria();
+        CategoriaDao categorias = new CategoriaDao();
         List<Pelicula> peliculas = new ArrayList();
         switch (categoria){
             case "infantil":
