@@ -1,8 +1,9 @@
 package com.example.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ActorDetalle {
+public class ActorDetalle implements Serializable{
     //ATRIBUTOS
 
     private String nombre;
