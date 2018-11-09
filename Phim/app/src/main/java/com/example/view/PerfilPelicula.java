@@ -60,11 +60,8 @@ import java.util.List;
         });
 
 
-        List<ActorDetalle> actores = (new DAOActores()).getActores();
 
         RecyclerView recyclerView = findViewById(R.id.actoresRecycler);
-
-        recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);

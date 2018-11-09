@@ -3,12 +3,15 @@ package com.example.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dao.DAOActores;
 import com.example.model.ActorDetalle;
 import com.example.wpenia.phim.R;
 
@@ -42,6 +45,12 @@ public class TabPerfilFragment extends Fragment {
         // Busco componentes
 
         TextView actoresView = view.findViewById(R.id.actoresRecycler);
+
+        RecyclerView recyclerView = view.findViewById(R.id.actoresRecycler);
+
+        recyclerView.setHasFixedSize(true);
+
+
 
 
 
