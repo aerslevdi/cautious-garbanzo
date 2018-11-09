@@ -15,6 +15,6 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_view_headline_black_24dp"
         app:fabSize="normal"
-        app:backgroundTint="@color/colorBoton"/>
+        app:backgroundTint="@color/colorGrey"/>
 
 </android.support.design.widget.CoordinatorLayout>

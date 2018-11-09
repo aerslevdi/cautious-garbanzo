@@ -20,8 +20,8 @@
             <ImageView
                 android:id="@+id/imageViewImagen"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:background="@color/colorBackgroundFoto"
+                android:layout_height="200dp"
+                android:background="@color/colorBlack"
                 android:scaleType="centerInside"
                 tools:src="@drawable/blancanieves"/>
 

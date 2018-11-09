@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:elevation="2dp"
-    app:cardUseCompatPadding="true"
-    android:padding="2dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="2dp">
 
     <ImageView
         android:id="@+id/imagenCategoria"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="300dp"
+        tools:src="@drawable/blancanieves"/>
 
     <TextView
         android:id="@+id/nombreCategoria"
@@ -22,7 +21,7 @@
         android:textColor="@color/colorWhite"
         android:layout_gravity="bottom"
         android:alpha="0.75"
-        android:background="#585858"
+        android:background="#212121"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

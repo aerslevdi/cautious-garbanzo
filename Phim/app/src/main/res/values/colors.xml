@@ -12,8 +12,15 @@
     <color name="colorGrey">#8e8e8e</color>
     <color name="colorGreyDark">#373737</color>
     <color name="colorGreyAccent">#616161</color>
+    <color name="colorBlack">#000000</color>
 
+
+    <color name="colorBackground">#000000</color>
     <color name="colorBackgroundFoto">#585858</color>
-    <color name="colorBackgroundFotoUno">#616161</color>
+    <!--<color name="colorBackgroundFoto">#000000</color>-->
+
+    <color name="colorBackgroundFotoUno">#212121</color>
+    <!--<color name="colorBackgroundFotoUno">#616161</color>-->
     <color name="colorBoton">#ffa726</color>
+
 </resources>

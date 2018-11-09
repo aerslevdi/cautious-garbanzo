@@ -21,8 +21,8 @@
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
         <item name="colorAccent">?themeColorAccent</item>
-        <item name="themeColorPrimary">@color/colorGrey</item>
-        <item name="themeColorPrimaryDark">@color/colorGreyDark</item>
+        <item name="themeColorPrimary">@color/colorGreyDark</item>
+        <item name="themeColorPrimaryDark">@color/colorBlack</item>
         <item name="themeColorAccent">@color/colorGreyAccent</item>
     </style>
 

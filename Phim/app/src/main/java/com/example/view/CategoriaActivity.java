@@ -23,6 +23,7 @@ public class CategoriaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTheme(R.style.GreyTheme);
         setContentView(R.layout.activity_categoria);
 
         intent = getIntent();
@@ -45,7 +46,7 @@ public class CategoriaActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
 
                 if (columnas==1) {
-                    fab.setImageResource(R.drawable.ic_view_module_black_24dp);
+                    fab.setImageResource(R.drawable.ic_apps_black_24dp);
                     categoria1Fragment.setArguments(bundle);
                     reemplazarFragment(categoria1Fragment);
                 }else{

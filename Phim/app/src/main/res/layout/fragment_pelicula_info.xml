@@ -14,7 +14,4 @@
         android:layout_height="wrap_content"
         android:numStars="5" />
 
-
-
-
 </FrameLayout>
