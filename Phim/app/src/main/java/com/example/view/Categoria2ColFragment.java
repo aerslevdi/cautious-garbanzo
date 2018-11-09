@@ -1,6 +1,7 @@
 package com.example.view;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,11 +29,11 @@ public class Categoria2ColFragment extends Fragment implements PeliculaAdapter.R
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        container.getContext().setTheme(R.style.GreyTheme);
         View view = inflater.inflate(R.layout.fragment_categoria2_col, container, false);
         Bundle bundle = getArguments();
         String categoria = bundle.getString("categoria");

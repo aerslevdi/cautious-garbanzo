@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragmento"
-    tools:context="com.example.wpenia.phim.com.example.view.CategoriaActivity">
+    android:id="@+id/fragmento">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -14,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_add_black_24dp"
+        android:src="@drawable/ic_view_headline_black_24dp"
         app:fabSize="normal"
-        app:backgroundTint="#0000FF"/>
+        app:backgroundTint="@color/colorBoton"/>
 
 </android.support.design.widget.CoordinatorLayout>

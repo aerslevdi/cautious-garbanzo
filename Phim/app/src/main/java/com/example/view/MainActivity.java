@@ -28,9 +28,10 @@ public class MainActivity extends AppCompatActivity implements CategoriaAdapter.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
+        //setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         //ThemeUtils.onActivityCreateSetTheme(this);
+        //getApplication().getBaseContext().setTheme(R.style.GreyTheme);
         this.setTheme(R.style.GreyTheme);
         setContentView(R.layout.activity_main);
 

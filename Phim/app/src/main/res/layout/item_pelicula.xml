@@ -21,7 +21,7 @@
                 android:id="@+id/imageViewImagen"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:background="#e6d8e0"
+                android:background="@color/colorBackgroundFoto"
                 android:scaleType="centerInside"
                 tools:src="@drawable/blancanieves"/>
 
@@ -30,10 +30,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imageViewImagen"
-                android:background="#dcc9d4"
+                android:background="@color/colorBackgroundFotoUno"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="10dp"
+                android:textColor="@color/colorWhite"
                 tools:text="Blanca Nieves"
                 android:gravity="center_horizontal"
                 android:textSize="20dp" />
@@ -43,11 +44,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title"
-                android:background="#dcc9d4"
+                android:background="@color/colorBackgroundFotoUno"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="10dp"
                 tools:text="Favoritos"
+                android:textColor="@color/colorWhite"
                 android:gravity="center_horizontal"
                 android:textSize="20dp" />
         </RelativeLayout>

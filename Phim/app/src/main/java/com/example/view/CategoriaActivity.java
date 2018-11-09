@@ -36,7 +36,7 @@ public class CategoriaActivity extends AppCompatActivity {
         this.categoria= bundle.getString("categoria");
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,9 +45,11 @@ public class CategoriaActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
 
                 if (columnas==1) {
+                    fab.setImageResource(R.drawable.ic_view_module_black_24dp);
                     categoria1Fragment.setArguments(bundle);
                     reemplazarFragment(categoria1Fragment);
                 }else{
+                    fab.setImageResource(R.drawable.ic_view_headline_black_24dp);
                     categoriaFragment.setArguments(bundle);
                     reemplazarFragment(categoriaFragment);
                 }
