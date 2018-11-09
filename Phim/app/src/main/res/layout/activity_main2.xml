@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:elevation="3dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageViewImagenDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:background="#e6d8e0"
+                android:scaleType="centerInside"
+                android:clickable="true"
+                tools:src="@drawable/blancanieves"/>
+
+            <TextView
+                android:id="@+id/titleDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageViewImagenDetalle"
+                android:background="#dcc9d4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                tools:text="Blanca Nieves"
+                android:gravity="center_horizontal"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/favoritosDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleDetalle"
+                android:background="#dcc9d4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                tools:text="Favoritos"
+                android:gravity="center_horizontal"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
