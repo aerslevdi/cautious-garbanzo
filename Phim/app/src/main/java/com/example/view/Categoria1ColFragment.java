@@ -1,7 +1,6 @@
 package com.example.view;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,18 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dao.CategoriaDao;
-import com.example.model.Pelicula;
+import com.example.model.PeliculaOld;
 import com.example.wpenia.phim.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.view.CategoriaActivity.KEY_CANTIDAD_COLUMNAS;
+import static com.example.view.CategoriaActivity.KEY_CATEGORIA;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Categoria1ColFragment extends Fragment  implements PeliculaAdapter.Receptor  {
-
+public class Categoria1ColFragment extends Fragment  implements PeliculaOldAdapter.Receptor  {
+    private int xmlView =R.layout.item_pelicula ;
 
     public Categoria1ColFragment() {
         // Required empty public constructor
@@ -36,46 +38,58 @@ public class Categoria1ColFragment extends Fragment  implements PeliculaAdapter.
         container.getContext().setTheme(R.style.GreyTheme);
         View view = inflater.inflate(R.layout.fragment_categoria1_col, container, false);
         Bundle bundle = getArguments();
-        String categoria = bundle.getString("categoria");
-        Integer columnas = bundle.getInt("columnas");
+        Integer categoria = bundle.getInt(KEY_CATEGORIA);
+        Integer columnas = bundle.getInt(KEY_CANTIDAD_COLUMNAS);
 
-        RecyclerView recyclerViewPantalla= view.findViewById(R.id.recyclerViewCategoria1);
-        CategoriaDao categorias = new CategoriaDao();
-        List<Pelicula> peliculas = new ArrayList();
-        switch (categoria){
-            case "infantil":
-                peliculas=categorias.getPeliculasInfantiles();
-                break;
-            case "adultos":
-                peliculas=categorias.getPeliculasAdultos();
-                break;
+        switch (columnas){
             default:
-                peliculas=categorias.getPeliculasInfantiles();
+            case 1:
+                xmlView =R.layout.item_pelicula;
+                break;
+            case 2:
+                xmlView =R.layout.item_pelicula;
                 break;
         }
 
-        PeliculaAdapter peliculaAdapter=  new PeliculaAdapter(this, peliculas);
-        recyclerViewPantalla.setAdapter(peliculaAdapter);
+        RecyclerView recyclerViewPantalla= view.findViewById(R.id.recyclerViewCategoria1);
+        CategoriaDao categorias = new CategoriaDao();
+        List<PeliculaOld> peliculaOlds = new ArrayList();
+        switch (categoria){
+            case 1:
+                peliculaOlds =categorias.getPeliculasInfantiles();
+                break;
+            case 2:
+                peliculaOlds =categorias.getPeliculasAdultos();
+                break;
+            case 3:
+                peliculaOlds =categorias.getPeliculasAdultos();
+                break;
+            default:
+                peliculaOlds =categorias.getPeliculasInfantiles();
+                break;
+        }
+
+        PeliculaOldAdapter peliculaOldAdapter =  new PeliculaOldAdapter(this, peliculaOlds,this.xmlView );
+        recyclerViewPantalla.setAdapter(peliculaOldAdapter);
 
         //RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
         //recyclerViewPantalla.setLayoutManager(layoutManager);
 
         // Grid Layout Manager
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(container.getContext(), 1);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(container.getContext(), columnas);
         recyclerViewPantalla.setLayoutManager(mGridLayoutManager);
 
         recyclerViewPantalla.setHasFixedSize(true);
-
         return view;
     }
 
     @Override
-    public void recibir(Pelicula pelicula) {
+    public void recibir(PeliculaOld peliculaOld) {
         Intent intent=new Intent(this.getActivity(), Main2Activity.class );
 
         Bundle bundle= new Bundle();
-        bundle.putString(Main2Activity.KEY_NOMBRE,pelicula.getNombre());
-        bundle.putInt(Main2Activity.KEY_IMAGEN,pelicula.getImagen());
+        bundle.putString(Main2Activity.KEY_NOMBRE, peliculaOld.getNombre());
+        bundle.putInt(Main2Activity.KEY_IMAGEN, peliculaOld.getImagen());
 
         intent.putExtras(bundle);
         startActivity(intent);

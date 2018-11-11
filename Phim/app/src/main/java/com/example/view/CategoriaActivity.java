@@ -10,15 +10,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.dao.MoviesDao;
 import com.example.wpenia.phim.R;
 
 public class CategoriaActivity extends AppCompatActivity {
-    private String categoria;
+    private Integer categoria;
     private Integer columnas=2;
     private Bundle bundle;
     private Intent intent;
+    final static String KEY_CANTIDAD_COLUMNAS="key_columnas";
+    final static String KEY_CATEGORIA="key_categoria";
+
     private Categoria2ColFragment categoriaFragment;
     private Categoria1ColFragment categoria1Fragment;
+    private CategoriaDosColumFragment categoriaDosColumFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,61 +31,55 @@ public class CategoriaActivity extends AppCompatActivity {
         this.setTheme(R.style.GreyTheme);
         setContentView(R.layout.activity_categoria);
 
+        MoviesDao moviesDao= MoviesDao.getInstance();
+
         intent = getIntent();
         bundle = intent.getExtras();
+        this.columnas=2;    //Inicia con 2 columnas
+        this.categoria = bundle.getInt(KEY_CATEGORIA);
 
-
-        bundle.putInt("columnas",columnas);
+        intent = getIntent();
+        bundle = intent.getExtras();
+        bundle.putInt(KEY_CATEGORIA,categoria);
+        bundle.putInt(KEY_CANTIDAD_COLUMNAS,columnas);
         intent.putExtras(bundle);
-
-
-        this.categoria= bundle.getString("categoria");
-
 
         final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 columnas=(columnas==1)?2:1;
-                bundle.putInt("columnas",columnas);
-                intent.putExtras(bundle);
+
 
                 if (columnas==1) {
                     fab.setImageResource(R.drawable.ic_apps_black_24dp);
-                    categoria1Fragment.setArguments(bundle);
-                    reemplazarFragment(categoria1Fragment);
+                    //categoria1Fragment.setArguments(bundle);
+                    //reemplazarFragment(categoria1Fragment);
                 }else{
                     fab.setImageResource(R.drawable.ic_view_headline_black_24dp);
-                    categoriaFragment.setArguments(bundle);
-                    reemplazarFragment(categoriaFragment);
+                    //categoriaDosColumFragment.setArguments(bundle);
+                    //reemplazarFragment(categoriaDosColumFragment);
                 }
+
+                categoriaDosColumFragment.onDestroy();
+                categoriaDosColumFragment= new CategoriaDosColumFragment();
+                Bundle bundle=new Bundle();
+                bundle.putInt(KEY_CANTIDAD_COLUMNAS,columnas);
+                bundle.putInt(KEY_CATEGORIA, categoria);
+                categoriaDosColumFragment.setArguments(bundle);
+                reemplazarFragment(categoriaDosColumFragment);
 
                 Toast.makeText(CategoriaActivity.this, categoria + ".." + columnas, Toast.LENGTH_SHORT).show();
             }
         });
+        // Crear Fragmentos
         categoria1Fragment = new Categoria1ColFragment();
-        // FRAGMENTS
-        // TODO (8) Crear una instancia del fragmento con dos columnas
-       categoriaFragment = new Categoria2ColFragment();
+        categoriaFragment = new Categoria2ColFragment();
+        categoriaDosColumFragment= new CategoriaDosColumFragment();
 
-        // Comunicacion entre Fragments
-        // TODO (9) Agregar el Bundle a la instancia del WelcomeFragment
-        categoriaFragment.setArguments(bundle);
-
-        this.reemplazarFragment(categoriaFragment);
-
-        /*
-        // Fragments
-        // TODO (10) Pedirle al CategoriaActivity su FragmentManager
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     FragmentManager fragmentManager = getSupportFragmentManager();
-        // TODO (11) Pedirle al FragmentManager una transacción
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        // TODO (12) Configurar la transacción, es decir, decirle que tiene que hacer.
-        fragmentTransaction.add(R.id.fragmento, categoriaFragment);
-        // TODO (13) Largar la transacción
-        fragmentTransaction.commit();
-       */
-
+        // Agregar bundle
+        categoriaDosColumFragment.setArguments(bundle);
+        this.reemplazarFragment(categoriaDosColumFragment);
     }
 
     private void reemplazarFragment(Fragment fragment){

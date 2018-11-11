@@ -20,7 +20,7 @@
         android:textSize="30sp"
         android:textColor="@color/colorWhite"
         android:layout_gravity="bottom"
-        android:alpha="0.75"
+        android:alpha="0.90"
         android:background="#212121"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -1,7 +1,6 @@
 package com.example.view;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,17 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dao.CategoriaDao;
-import com.example.model.Pelicula;
+import com.example.model.PeliculaOld;
 import com.example.wpenia.phim.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.view.CategoriaActivity.KEY_CANTIDAD_COLUMNAS;
+import static com.example.view.CategoriaActivity.KEY_CATEGORIA;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Categoria2ColFragment extends Fragment implements PeliculaAdapter.Receptor {
+public class Categoria2ColFragment extends Fragment implements PeliculaOldAdapter.Receptor {
 
 
     public Categoria2ColFragment() {
@@ -36,26 +38,16 @@ public class Categoria2ColFragment extends Fragment implements PeliculaAdapter.R
         container.getContext().setTheme(R.style.GreyTheme);
         View view = inflater.inflate(R.layout.fragment_categoria2_col, container, false);
         Bundle bundle = getArguments();
-        String categoria = bundle.getString("categoria");
-        Integer columnas = bundle.getInt("columnas");
+        Integer categoria = bundle.getInt(KEY_CATEGORIA);
+        Integer columnas = bundle.getInt(KEY_CANTIDAD_COLUMNAS);
 
         RecyclerView recyclerViewPantalla= view.findViewById(R.id.recyclerViewCategoria);
         CategoriaDao categorias = new CategoriaDao();
-        List<Pelicula> peliculas = new ArrayList();
-        switch (categoria){
-            case "infantil":
-                peliculas=categorias.getPeliculasInfantiles();
-                break;
-            case "adultos":
-                peliculas=categorias.getPeliculasAdultos();
-                break;
-            default:
-                peliculas=categorias.getPeliculasInfantiles();
-                break;
-        }
+        List<PeliculaOld> peliculaOlds = new ArrayList();
 
-        PeliculaAdapter peliculaAdapter=  new PeliculaAdapter(this, peliculas);
-        recyclerViewPantalla.setAdapter(peliculaAdapter);
+
+        PeliculaOldAdapter peliculaOldAdapter =  new PeliculaOldAdapter(this, peliculaOlds,R.layout.item_pelicula);
+        recyclerViewPantalla.setAdapter(peliculaOldAdapter);
 
         //RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
         //recyclerViewPantalla.setLayoutManager(layoutManager);
@@ -63,7 +55,6 @@ public class Categoria2ColFragment extends Fragment implements PeliculaAdapter.R
         // Grid Layout Manager
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(container.getContext(), columnas);
         recyclerViewPantalla.setLayoutManager(mGridLayoutManager);
-
         recyclerViewPantalla.setHasFixedSize(true);
 
         return view;
@@ -80,12 +71,12 @@ public class Categoria2ColFragment extends Fragment implements PeliculaAdapter.R
 
 
     @Override
-    public void recibir(Pelicula pelicula) {
+    public void recibir(PeliculaOld peliculaOld) {
         Intent intent=new Intent(this.getActivity(), Main2Activity.class );
 
         Bundle bundle= new Bundle();
-        bundle.putString(Main2Activity.KEY_NOMBRE,pelicula.getNombre());
-        bundle.putInt(Main2Activity.KEY_IMAGEN,pelicula.getImagen());
+        bundle.putString(Main2Activity.KEY_NOMBRE, peliculaOld.getNombre());
+        bundle.putInt(Main2Activity.KEY_IMAGEN, peliculaOld.getImagen());
 
         intent.putExtras(bundle);
         startActivity(intent);
