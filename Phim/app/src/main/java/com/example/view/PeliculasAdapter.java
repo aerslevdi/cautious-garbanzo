@@ -59,7 +59,6 @@ public class PeliculasAdapter extends RecyclerView.Adapter<PeliculasAdapter.MyVi
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Pelicula pelicula = peliculaList.get(position);
         holder.title.setText(pelicula.getName());
-        holder.count.setText(pelicula.getNumOfMovies() + " songs");
 
         // loading pelicula cover using Glide library
         Glide.with(mContext).load(pelicula.getThumbnail()).into(holder.thumbnail);

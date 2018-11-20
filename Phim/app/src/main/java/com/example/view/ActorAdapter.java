@@ -17,7 +17,7 @@ import java.util.List;
 public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ActorViewHolder>{
 
     //ATRIBUTOS
-
+    private static final String KEY_ACTORES = "actores";
     private List<ActorDetalle> actores;
     //private AdapterListener adapterListener;
 

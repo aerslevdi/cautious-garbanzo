@@ -36,12 +36,12 @@ public class PerfilPeliculaFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static PerfilPeliculaFragment perfilFabrica(PeliculaOld dato){
+    public static PerfilPeliculaFragment perfilFabrica(Pelicula dato){
         PerfilPeliculaFragment fragment = new PerfilPeliculaFragment();
 
         Bundle bundle = new Bundle();
 
-        bundle.putString(PerfilPeliculaFragment.KEY_TITULO, dato.getNombre());
+        bundle.putString(PerfilPeliculaFragment.KEY_TITULO, dato.getName());
         bundle.putString(PerfilPeliculaFragment.KEY_ANIO, dato.getYear());
         bundle.putString(PerfilPeliculaFragment.KEY_RATED, dato.getRated());
         bundle.putString(PerfilPeliculaFragment.KEY_GENRE, dato.getGenre());
