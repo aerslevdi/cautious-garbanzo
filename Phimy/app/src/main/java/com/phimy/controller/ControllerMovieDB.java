@@ -14,10 +14,19 @@ public class ControllerMovieDB {
     final static public Integer KEY_SEARCH_POPULAR_MOVIE = 0;
     final static public Integer KEY_SEARCH_POPULAR_TV = 1;
     final static public Integer KEY_SEARCH_NOW_PLAYING = 2;
-    MovieDBDao movieDBDao;
+    MovieDBDao movieDBDao = new MovieDBDao();
 
-    public ControllerMovieDB() {
-        this.movieDBDao = new MovieDBDao();
+    private static ControllerMovieDB instance;
+
+    //public ControllerMovieDB() {
+    //    this.movieDBDao = new MovieDBDao();
+    //}
+
+    public static ControllerMovieDB getInstance(){
+        if (instance==null){
+            instance= new ControllerMovieDB();
+        }
+        return instance;
     }
 
     public void getMovies(final ResultListener<List<MovieDB>> listenerView, Context context){
@@ -51,5 +60,32 @@ public class ControllerMovieDB {
                 }
             }, KEY_SEARCH_NOW_PLAYING);
         }
+    }
+
+    public void getFavoritos(final ResultListener<List<MovieDB>> listenerView, Context context){
+        if (InternetConnection.isConnection(context)) {
+            movieDBDao.getFavoritos(new ResultListener<List<MovieDB>>() {
+                @Override
+                public void finish(List<MovieDB> resultado) {
+                    listenerView.finish(resultado);
+                }
+            });
+        }
+    }
+
+    public void addFavoritos(MovieDB movieDB){
+            movieDBDao.addFavoritos(movieDB);
+    }
+
+    public void removeFavoritos(MovieDB movieDB){
+        movieDBDao.removeFavoritos(movieDB);
+    }
+
+    public List<MovieDB> getFavoritosMovieDBS(){
+        return movieDBDao.getFavoritosMovieDBS();
+    }
+
+    public Boolean isFavorito(MovieDB movieDB) {
+        return (getFavoritosMovieDBS().contains(movieDB)) ? true : false;
     }
 }

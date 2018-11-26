@@ -1,6 +1,7 @@
 package com.phimy.view.fragment;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,7 +28,7 @@ import Utils.ResultListener;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChatFragment extends Fragment {
+public class OnRatedFragment extends Fragment implements MovieAdapter.Receptor{
     private ControllerMovieDB controllerMovieDB;
 
     @Override
@@ -37,20 +38,19 @@ public class ChatFragment extends Fragment {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
 
-        this.controllerMovieDB=new ControllerMovieDB();
+        this.controllerMovieDB=ControllerMovieDB.getInstance();
         loadRecyclerView(view);
-
         return view;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_chats, menu);
+        inflater.inflate(R.menu.menu_status, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_chat) {
+        if (item.getItemId() == R.id.action_status) {
             Toast.makeText(getActivity(), "Clicked on " + item.getTitle(), Toast.LENGTH_SHORT)
                     .show();
         }
@@ -64,18 +64,26 @@ public class ChatFragment extends Fragment {
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        MovieAdapter adapter = new MovieAdapter(new ArrayList<MovieDB>(), R.layout.movie_cardview);
+        Drawable imageFavorito= this.getResources().getDrawable(R.drawable.favoritered);
+        Drawable imageNoFavorito= this.getResources().getDrawable(R.drawable.favoritegrey);
+        MovieAdapter adapter = new MovieAdapter(this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
+                imageFavorito,imageNoFavorito);
         recyclerView.setAdapter(adapter);
 
         loadAdapterData(adapter, view);
     }
 
     private void loadAdapterData(final MovieAdapter adapter, View view) {
-        controllerMovieDB.getTvMovies(new ResultListener<List<MovieDB>>() {
+        controllerMovieDB.getNowPlaying(new ResultListener<List<MovieDB>>() {
             @Override
             public void finish(List<MovieDB> result) {
-                adapter.setArtworkList(result);
+                adapter.setMovieList(result);
             }
         }, view.getContext());
+    }
+
+    @Override
+    public void recibir(MovieDB movieDB) {
+
     }
 }

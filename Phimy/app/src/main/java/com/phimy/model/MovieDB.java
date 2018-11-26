@@ -1,7 +1,9 @@
 package com.phimy.model;
 
 
-public class MovieDB {
+import java.io.Serializable;
+
+public class MovieDB implements Serializable{
     private String title;
     private Integer vote_count;
     private Integer id;
@@ -32,5 +34,10 @@ public class MovieDB {
                 ", id=" + id +
                 ", poster_path='" + poster_path + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this.id.equals(((MovieDB) obj).id));
     }
 }
