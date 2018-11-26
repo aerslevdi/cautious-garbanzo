@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +16,7 @@ import com.phimy.model.MovieDB;
 
 import java.util.List;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> implements Filterable {
     private List<MovieDB> movieList;
     private Integer resources;
 
@@ -40,6 +42,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public int getItemCount() {
         return movieList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        //https://www.androidhive.info/2017/11/android-recyclerview-with-search-filter-functionality/
+        return null;
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
