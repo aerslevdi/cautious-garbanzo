@@ -60,7 +60,7 @@ public class MovieDBDao extends DaoHelper {
     public void getFavoritos(final ResultListener<List<MovieDB>> listenerDelController){
         listenerDelController.finish(favoritosMovieDBS);
     }
-
+    public void getCredits (){}
     public void addFavoritos(MovieDB movieDB){
         if (!favoritosMovieDBS.contains(movieDB)) {
             favoritosMovieDBS.add(movieDB);

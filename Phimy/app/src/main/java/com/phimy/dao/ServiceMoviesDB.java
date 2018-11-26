@@ -15,4 +15,7 @@ public interface ServiceMoviesDB {
 
     @GET("tv/popular")
     Call<MovieDBContainer> getPopularTv(@Query("api_key") String apiKey);
+
+    @GET("movie/{movie_id}/credits")
+    Call<MovieDBContainer> getCredits(@Query("api_key") String apiKey);
 }
