@@ -1,5 +1,6 @@
 package com.phimy.dao;
 
+import com.phimy.model.Credit;
 import com.phimy.model.MovieDB;
 import com.phimy.model.MovieDBContainer;
 
@@ -60,7 +61,10 @@ public class MovieDBDao extends DaoHelper {
     public void getFavoritos(final ResultListener<List<MovieDB>> listenerDelController){
         listenerDelController.finish(favoritosMovieDBS);
     }
-    public void getCredits (){}
+    public void getCredits (final ResultListener<List<Credit>> listenerDelController){
+
+
+    }
     public void addFavoritos(MovieDB movieDB){
         if (!favoritosMovieDBS.contains(movieDB)) {
             favoritosMovieDBS.add(movieDB);
