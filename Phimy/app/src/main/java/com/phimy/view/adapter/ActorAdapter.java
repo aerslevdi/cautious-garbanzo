@@ -70,7 +70,7 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ActorViewHol
     }
 
     public List<Cast> getCasts(List<Credit> credits) {
-        for ()
+       // for ()
 
     }
 

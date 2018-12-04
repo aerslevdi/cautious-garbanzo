@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.phimy.R;
+import com.phimy.model.Cast;
+import com.phimy.model.Credit;
+import com.phimy.model.Crew;
 import com.phimy.model.MovieDB;
 import com.phimy.view.adapter.ActorAdapter;
 
@@ -19,7 +22,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetalleFragment extends Fragment {
+public class DetalleFragment extends Fragment implements ActorAdapter.AdapterListener {
     private static final String KEY_TITULO = "titulo";
     private static final String KEY_ANIO = "anio";
     private static final String KEY_RATED = "rated";
@@ -28,12 +31,14 @@ public class DetalleFragment extends Fragment {
     private static final String KEY_DURACION = "duracion";
     private static final String KEY_ID = "id";
     private static final String KEY_TRAILER = "trailer";
+    private static final String KEY_CREW = "crew";
+    public static final String KEY_CAST = "cast";
 
 
     public DetalleFragment() {
         // Required empty public constructor
     }
-    public static DetalleFragment perfilFabrica(MovieDB dato){
+    public static DetalleFragment perfilFabrica(MovieDB dato, Credit list){
         DetalleFragment fragment = new DetalleFragment();
 
         Bundle bundle = new Bundle();
@@ -45,6 +50,8 @@ public class DetalleFragment extends Fragment {
         bundle.putInt(DetalleFragment.KEY_DURACION, dato.getRuntime());
         bundle.putInt(DetalleFragment.KEY_TRAILER, dato.getTrailer());
         bundle.putInt(DetalleFragment.KEY_ID, dato.getId());
+        //bundle.putArr(DetalleFragment.KEY_CAST, list.getCast());
+        //bundle.putParcelableArrayList(DetalleFragment.KEY_CREW, list.getCrew());
         fragment.setArguments(bundle);
 
         return fragment;
@@ -65,8 +72,10 @@ public class DetalleFragment extends Fragment {
         String plot = bundle.getString(KEY_PLOT);
         String duracion = bundle.getString(KEY_DURACION);
         Integer trailer = bundle.getInt(KEY_TRAILER);
+        //List<Cast> actores = bundle.getParcelableArrayList(KEY_CAST);
+        //List<Crew> crewList = bundle.getParcelableArrayList(KEY_CREW);
         TextView tituloView = view.findViewById(R.id.tituloPelicula);
-        ActorAdapter actorAdapter = new ActorAdapter(actores);
+        //ActorAdapter actorAdapter = new ActorAdapter(actores, this);
         TextView generoView = view.findViewById(R.id.genero);
         TextView duracionView = view.findViewById(R.id.duracion);
         TextView fechaView = view.findViewById(R.id.fecha);
@@ -85,10 +94,14 @@ public class DetalleFragment extends Fragment {
         generoView.setText(genre);
         duracionView.setText(duracion);
         fechaView.setText(anio);
-        recyclerView.setAdapter(actorAdapter);
+        //recyclerView.setAdapter(actorAdapter);
 
 
         return view;
     }
 
+    @Override
+    public void recibir() {
+
+    }
 }

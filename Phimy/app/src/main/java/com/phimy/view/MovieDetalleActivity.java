@@ -34,4 +34,5 @@ public class MovieDetalleActivity extends AppCompatActivity {
         textView.setText(movieDB.getTitle());
 
     }
+
 }
