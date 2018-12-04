@@ -114,6 +114,10 @@
                     android:textAlignment="center"
                     android:text="8/10"
                     android:layout_below="@id/scoreImg"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/plotView"/>
             </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
@@ -141,14 +145,6 @@
 
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#eadf05"
-        android:src="@drawable/ic_bookmark_border_black_24dp"
-        app:fabSize="normal"
-        app:layout_anchor="@id/imagenVideo"
-        app:layout_anchorGravity="right|bottom" />
+
 
 </android.support.design.widget.CoordinatorLayout>

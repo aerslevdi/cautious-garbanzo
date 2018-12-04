@@ -1,6 +1,7 @@
 package com.phimy.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.phimy.R;
 import com.phimy.model.Cast;
 import com.phimy.model.Credit;
@@ -23,6 +25,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class DetalleFragment extends Fragment implements ActorAdapter.AdapterListener {
+    public static final String KEY_MOVIEDB="movieDB";
     private static final String KEY_TITULO = "titulo";
     private static final String KEY_ANIO = "anio";
     private static final String KEY_RATED = "rated";
@@ -38,18 +41,12 @@ public class DetalleFragment extends Fragment implements ActorAdapter.AdapterLis
     public DetalleFragment() {
         // Required empty public constructor
     }
-    public static DetalleFragment perfilFabrica(MovieDB dato, Credit list){
+    public static DetalleFragment perfilFabrica(MovieDB dato){
         DetalleFragment fragment = new DetalleFragment();
 
+
         Bundle bundle = new Bundle();
-        bundle.putString(DetalleFragment.KEY_TITULO, dato.getTitle());
-        bundle.putString(DetalleFragment.KEY_ANIO, dato.getRelease_date());
-        bundle.putInt(DetalleFragment.KEY_RATED, dato.getPopularity());
-        bundle.putString(DetalleFragment.KEY_GENRE, dato.getGenres());
-        bundle.putString(DetalleFragment.KEY_PLOT, dato.getOverview());
-        bundle.putInt(DetalleFragment.KEY_DURACION, dato.getRuntime());
-        bundle.putInt(DetalleFragment.KEY_TRAILER, dato.getTrailer());
-        bundle.putInt(DetalleFragment.KEY_ID, dato.getId());
+        bundle.putSerializable(DetalleFragment.KEY_MOVIEDB, dato);
         //bundle.putArr(DetalleFragment.KEY_CAST, list.getCast());
         //bundle.putParcelableArrayList(DetalleFragment.KEY_CREW, list.getCrew());
         fragment.setArguments(bundle);
@@ -65,13 +62,16 @@ public class DetalleFragment extends Fragment implements ActorAdapter.AdapterLis
         View view = inflater.inflate(R.layout.fragment_detalle, container, false);
         Bundle bundle = getArguments();
         // Datos
-        String titulo = bundle.getString(KEY_TITULO);
-        String anio = bundle.getString(KEY_ANIO);
+
+
+
+        String path = movieDB.getPoster_path();
+        Glide.with(this).load("http://image.tmdb.org/t/p/w185/"+movieDB.getPoster_path()).into(imageView);
+
+
+
         String rate = bundle.getString(KEY_RATED);
-        String genre = bundle.getString(KEY_GENRE);
-        String plot = bundle.getString(KEY_PLOT);
-        String duracion = bundle.getString(KEY_DURACION);
-        Integer trailer = bundle.getInt(KEY_TRAILER);
+
         //List<Cast> actores = bundle.getParcelableArrayList(KEY_CAST);
         //List<Crew> crewList = bundle.getParcelableArrayList(KEY_CREW);
         TextView tituloView = view.findViewById(R.id.tituloPelicula);
@@ -79,6 +79,7 @@ public class DetalleFragment extends Fragment implements ActorAdapter.AdapterLis
         TextView generoView = view.findViewById(R.id.genero);
         TextView duracionView = view.findViewById(R.id.duracion);
         TextView fechaView = view.findViewById(R.id.fecha);
+        TextView plotView = view.findViewById(R.id.plotView);
         TextView scoreView = view.findViewById(R.id.scoreNumero);
         TextView metaView = view.findViewById(R.id.scoreMeta);
         TextView premiosView = view.findViewById(R.id.premiosNumero);
@@ -89,11 +90,15 @@ public class DetalleFragment extends Fragment implements ActorAdapter.AdapterLis
 
 
         // Seteo los datos
-        tituloView.setText(titulo);
-        trailerView.setImageResource(trailer);
-        generoView.setText(genre);
-        duracionView.setText(duracion);
-        fechaView.setText(anio);
+        tituloView.setText(movieDB.getTitle());
+        trailerView.setImageResource(movieDB.getTrailer());
+        generoView.setText(movieDB.getGenres());
+        duracionView.setText(movieDB.getRuntime());
+        fechaView.setText(movieDB.getRelease_date());
+        plotView.setText(movieDB.getOverview());
+        scoreView.setText(movieDB.getVote_count());
+        metaView.setText(movieDB.getPopularity());
+
         //recyclerView.setAdapter(actorAdapter);
 
 

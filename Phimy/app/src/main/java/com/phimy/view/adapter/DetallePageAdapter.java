@@ -13,10 +13,9 @@ import java.util.List;
 
 public class DetallePageAdapter extends FragmentPagerAdapter {
     List <Fragment> fragments;
-    List <MovieDB> movieList;
+
     List<Cast> actores;
-    List<Crew> backstage;
-    List<Credit> fullCredit;
+
 
     public DetallePageAdapter(FragmentManager fm, List<Fragment> fragments, List<MovieDB> movieList, List<Cast> actores, List<Crew> backstage, List<Credit> fullCredit) {
         super(fm);
