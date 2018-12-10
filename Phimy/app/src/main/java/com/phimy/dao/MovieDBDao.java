@@ -1,5 +1,7 @@
 package com.phimy.dao;
 
+import com.phimy.model.Cast;
+import com.phimy.model.CastDBContainer;
 import com.phimy.model.MovieDB;
 import com.phimy.model.MovieDBContainer;
 
@@ -59,6 +61,27 @@ public class MovieDBDao extends DaoHelper {
 
     public void getFavoritos(final ResultListener<List<MovieDB>> listenerDelController){
         listenerDelController.finish(favoritosMovieDBS);
+
+
+    }
+
+
+    //GET CAST
+    public void getCast(final ResultListener<List<Cast>> castListener, Integer id){
+        retrofit2.Call <CastDBContainer> castDBContainerCall = serviceMovies.getCast(id, api_key);
+        castDBContainerCall.enqueue(new Callback<CastDBContainer>() {
+            @Override
+            public void onResponse(retrofit2.Call<CastDBContainer> call, Response<CastDBContainer> response) {
+                CastDBContainer castContainer = response.body();
+                List<Cast> castList = castContainer.getFullCast();
+                castListener.finish(castList);
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<CastDBContainer> call, Throwable t) {
+
+            }
+        });
     }
 
     public void addFavoritos(MovieDB movieDB){

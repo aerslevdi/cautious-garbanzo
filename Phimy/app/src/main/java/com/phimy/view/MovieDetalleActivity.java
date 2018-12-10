@@ -38,7 +38,7 @@ public class MovieDetalleActivity extends AppCompatActivity {
         FragmentManager fragmentManager= getSupportFragmentManager();
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable(detalleFragment.KEY_MOVIEDBFR, movieDB);
+        bundle.putSerializable(detalleFragment.KEY_MOVIEDBFRAG, movieDB);
         detalleFragment.setArguments(bundle);
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

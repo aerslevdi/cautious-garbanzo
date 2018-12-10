@@ -10,6 +10,7 @@
     <string name="pref_sync_summ">rock</string>
     <string name="pref_syncConnectionType">hip hop</string>
     <string name="pref_syncConnectionTypes_default">rap</string>
+    <string name="shareString">Share</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
