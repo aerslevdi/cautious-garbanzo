@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "467511585102",
+    "firebase_url": "https://phimy-224619.firebaseio.com",
+    "project_id": "phimy-224619",
+    "storage_bucket": "phimy-224619.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467511585102:android:bee52e2798ad47ca",
+        "android_client_info": {
+          "package_name": "com.phimy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467511585102-fkvvmd7gnpf2bskg47cag0aj4im5acfd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJXofgRp2I_g9ChElwIkLRUSZJHF0ZUKY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
