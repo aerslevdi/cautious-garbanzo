@@ -1,5 +1,6 @@
 package com.phimy.view;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -21,8 +22,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.login.LoginManager;
@@ -64,6 +67,8 @@ public class InicioActivity extends MainActivity {
     private TabItem tabUpComing;
     private TabItem tabFavoritos;
     private DrawerLayout drawerLayout;
+    private SearchView searchView;
+    private MovieAdapter movieAdapter;
 
     @Override
     protected void onStart() {
@@ -239,5 +244,30 @@ public class InicioActivity extends MainActivity {
             default:
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(InicioActivity.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                movieAdapter.getFilter().filter(query);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                movieAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
     }
 }

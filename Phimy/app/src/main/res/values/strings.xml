@@ -13,4 +13,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shareString">Share</string>
     <color name="background">#FF0000</color>
+    <string name="play">Ver trailer</string>
+    <string name="search_hint">Buscar</string>
 </resources>

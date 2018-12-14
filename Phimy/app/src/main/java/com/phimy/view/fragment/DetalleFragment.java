@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.phimy.R;
 import com.phimy.controller.ControllerMovieDB;
 import com.phimy.model.Cast;
@@ -45,7 +46,7 @@ public class DetalleFragment extends Fragment {
     private FloatingActionButton fab;
     private String path;
     private MovieDB movieDB;
-    private TextView verTrailer;
+    private ImageView verTrailer;
     private Listener listener;
     private ControllerMovieDB controller = new ControllerMovieDB();
     private List<Cast> casting = new ArrayList<>();
@@ -98,7 +99,7 @@ public class DetalleFragment extends Fragment {
 
         //GET COMPONENTS
 
-        tituloView = view.findViewById(R.id.tituloPelicula);
+        tituloView = view.findViewById(R.id.nombreMovie);
 
         fechaView = view.findViewById(R.id.fecha);
         scoreView = view.findViewById(R.id.scoreNumero);
@@ -113,14 +114,19 @@ public class DetalleFragment extends Fragment {
 
         //SET DATA
 
-        tituloView.setText(movieDB.getTitle());
+
         tituloView.setText(movieDB.getTitle());
         Glide.with(this).load("http://image.tmdb.org/t/p/w185/" + path).into(trailerView);
         fechaView.setText(movieDB.getRelease_date());
         scoreView.setText(movieDB.getPopularity().toString());
         metaView.setText(movieDB.getVote_count().toString());
 
-        plot.setText(movieDB.getOverview());
+        //plot.setText(movieDB.getOverview());
+        ExpandableTextView expTv1 = (ExpandableTextView) view.findViewById(R.id.expand_text_view);
+        expTv1.setText(movieDB.getOverview());
+
+
+
 
 
         //SHARE
@@ -141,14 +147,7 @@ public class DetalleFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.getVideoDB(getContext(), new ResultListener<VideoDB>() {
-                    @Override
-                    public void finish(VideoDB resultado) {
-                        videoKey = resultado.getKey();
-                        DetalleFragment.VideoTrailer listenerTrailer = (DetalleFragment.VideoTrailer) getContext();
-                        listenerTrailer.recibirVideo(videoKey);
-                    }
-                }, movieDB.getId());
+
             }
         });
 
@@ -159,7 +158,18 @@ public class DetalleFragment extends Fragment {
         verTrailer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               listener.send(movieDB);
+                if (favoritos == null) {
+                    favoritos = new ArrayList<>();
+                    favoritos.add(movieDB);
+                } else {
+                    favoritos.add(movieDB);
+                }
+                Snackbar.make(v, "La pelicula ha sido agregada a tu lista", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        favoritos.remove(movieDB);
+                    }
+                }).show();
             }
         });
 

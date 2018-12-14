@@ -9,19 +9,19 @@ import java.io.Serializable;
 
 @Entity(tableName = "Series")
 public class SerieDB implements Serializable{
-    private String title;
+    private String name;
     private Integer vote_count;
     @PrimaryKey
     @NonNull
     private Integer id;
-    private String poster_path;
+    private String profile_path;
     private String overview;
     private String release_date;
     private Double popularity;
 
 
     public String getTitle() {
-        return title;
+        return name;
     }
 
     public Integer getVote_count() {
@@ -33,7 +33,7 @@ public class SerieDB implements Serializable{
     }
 
     public String getPoster_path() {
-        return poster_path;
+        return profile_path;
     }
 
     public String getOverview() {
@@ -51,10 +51,10 @@ public class SerieDB implements Serializable{
     @Override
     public String toString() {
         return "MovieDB{" +
-                "title='" + title + '\'' +
+                "title='" + name + '\'' +
                 ", vote_count=" + vote_count +
                 ", id=" + id +
-                ", poster_path='" + poster_path + '\'' +
+                ", poster_path='" + profile_path + '\'' +
                 '}';
     }
 
@@ -64,7 +64,7 @@ public class SerieDB implements Serializable{
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.name = title;
     }
 
     public void setVote_count(Integer vote_count) {
@@ -76,7 +76,7 @@ public class SerieDB implements Serializable{
     }
 
     public void setPoster_path(String poster_path) {
-        this.poster_path = poster_path;
+        this.profile_path = poster_path;
     }
 
     public void setOverview(String overview) {
