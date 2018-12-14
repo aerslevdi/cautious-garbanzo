@@ -1,16 +1,13 @@
 package com.phimy.view;
 
-import android.app.Activity;
-import android.preference.PreferenceActivity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.phimy.R;
-import com.phimy.view.fragment.DetalleFragment;
 import com.phimy.view.fragment.PreferenceFragmentCustom;
 
 
@@ -19,9 +16,6 @@ public class SettingActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,5 +28,15 @@ public class SettingActivity extends AppCompatActivity {
             ft.commit();
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        //TODO REVISAR si es buena práctica Reseteo toda las pantallas
+        Intent mainActivity = new Intent(SettingActivity.this, InicioActivity.class);
+        startActivity(mainActivity);
+        finish();
     }
 }

@@ -1,5 +1,6 @@
 package com.phimy.view.adapter;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.phimy.R;
 import com.phimy.controller.ControllerMovieDB;
 import com.phimy.helper.ItemTouchHelperAdapter;
+import com.phimy.model.FavoritoDB;
 import com.phimy.model.MovieDB;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> implements ItemTouchHelperAdapter, Filterable {
+    private Context context;
     private List<MovieDB> movieList;
     private Integer resources;
     private Drawable imageFavorito;
@@ -35,12 +38,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     final static public Integer KEY_TAG_FAVORITO = 0;
     final static public Integer KEY_TAG_NOFAVORITO = 1;
 
-    public MovieAdapter(Receptor receptor, List<MovieDB> movieList, Integer resources, Drawable imageFavorito, Drawable imageNoFavorito) {
+    public MovieAdapter(Context context, Receptor receptor, List<MovieDB> movieList, Integer resources, Drawable imageFavorito, Drawable imageNoFavorito) {
         this.movieList = movieList;
         this.resources = resources;
         this.imageFavorito=imageFavorito;
         this.imageNoFavorito=imageNoFavorito;
         this.receptor=receptor;
+        this.context=context;
     }
 
     @NonNull
@@ -60,19 +64,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             @Override
             public void onClick(View view) {
                 Integer icon= (Integer) movieViewHolder.favoriteImage.getTag();
-                if (icon == KEY_TAG_FAVORITO){
+                    if (icon == KEY_TAG_FAVORITO){
                     Toast.makeText(view.getContext(), "agregar favoritos" , Toast.LENGTH_SHORT).show();
                     movieViewHolder.favoriteImage.setCompoundDrawablesWithIntrinsicBounds(imageFavorito,
                             null, null, null );
                     movieViewHolder.favoriteImage.setTag(KEY_TAG_NOFAVORITO);
-                    controllerMovieDB.getInstance().addFavoritos(movieDB);
+                    controllerMovieDB.getInstance().addFavoritos(context, movieDB);
                     notifyDataSetChanged();
                 } else {
                     Toast.makeText(view.getContext(), "eliminar favoritos" , Toast.LENGTH_SHORT).show();
                     movieViewHolder.favoriteImage.setCompoundDrawablesWithIntrinsicBounds(imageNoFavorito,
                             null, null, null );
                     movieViewHolder.favoriteImage.setTag(KEY_TAG_FAVORITO);
-                    controllerMovieDB.getInstance().removeFavoritos(movieDB);
+                    controllerMovieDB.getInstance().removeFavoritos(context, movieDB);
                     notifyDataSetChanged();
                 }
             }
@@ -91,7 +95,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onItemDismiss(int position) {
-
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -123,7 +126,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         public void controlFavoritos(MovieDB movieDB){
             //TODO controlar si la peli está o no en favoritos
-            if (controllerMovieDB.getInstance().isFavorito(movieDB)) {
+            if (controllerMovieDB.getInstance().isFavorito(movieDB, context)) {
                 //Asigno a todos los no favoritos
                 favoriteImage.setCompoundDrawablesWithIntrinsicBounds(imageFavorito,
                         null, null, null);

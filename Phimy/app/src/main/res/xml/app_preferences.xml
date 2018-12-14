@@ -3,6 +3,43 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <android.support.v7.preference.PreferenceCategory
+        android:title="Sonido Aplicación">
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="sonido"
+            android:summary="Activar el sonido"
+            android:title="Seleccionar Preferencia"/>
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="Pantallas">
+
+        <ListPreference
+            android:dialogTitle="Select Diseño"
+            android:entries="@array/settings_themes"
+            android:entryValues="@array/settings_themes_values"
+            android:key="listPreferenceThemes"
+            android:summary="Click para seleccionar el theme"
+            android:title="Diseño"
+            android:defaultValue="2"/>
+
+    </android.support.v7.preference.PreferenceCategory>-->
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="Visualización Movies">
+
+        <ListPreference
+            android:dialogTitle="Select columnas"
+            android:entries="@array/settings_columns"
+            android:entryValues="@array/settings_columns_values"
+            android:key="listPreferenceColumnas"
+            android:summary="Click para seleccionar cantidad de columnas"
+            android:title="Columnas"
+            android:defaultValue="2"/>
+
+    </android.support.v7.preference.PreferenceCategory>
+
+ <!--   <android.support.v7.preference.PreferenceCategory
         android:title="Hola hola">
 
         <android.support.v7.preference.SwitchPreferenceCompat
@@ -39,19 +76,6 @@
             android:title="time_title"/>
 
     </android.support.v7.preference.PreferenceCategory>
-
-    <android.support.v7.preference.PreferenceCategory
-        android:title="category_three">
-
-        <ListPreference
-            android:dialogTitle="Select columnas"
-            android:entries="@array/settings_columns"
-            android:entryValues="@array/settings_columns_values"
-            android:key="columnas"
-            android:summary="Click to show a list to choose from"
-            android:title="List Preference"
-            android:defaultValue="2"/>
-
-    </android.support.v7.preference.PreferenceCategory>
+-->
 
 </android.support.v7.preference.PreferenceScreen>

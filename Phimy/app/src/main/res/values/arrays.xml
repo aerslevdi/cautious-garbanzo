@@ -10,4 +10,15 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <string-array name="settings_themes">
+        <item>Ligth</item>
+        <item>Darck</item>
+        <item>Ambar</item>
+    </string-array>
+    <string-array name="settings_themes_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

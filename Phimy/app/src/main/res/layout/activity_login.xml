@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c9b2ba"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="350dp"
+            android:layout_height="500dp"
+            android:src="@drawable/socialnet"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"/>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_buttonNF"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_centerInParent="true" />
+
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/imageView"
+            android:text="LOGIN WITH FACEBOOK"
+            android:shadowRadius="@integer/google_play_services_version"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorFacebook"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

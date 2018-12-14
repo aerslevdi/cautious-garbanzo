@@ -1,8 +1,11 @@
 package com.phimy.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -22,6 +25,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.phimy.R;
 import com.phimy.controller.ControllerMovieDB;
 import com.phimy.model.MovieDB;
@@ -31,6 +37,7 @@ import com.phimy.view.adapter.PageAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.DefaultSettings;
 import Utils.ResultListener;
 import Utils.ThemeUtils;
 
@@ -44,17 +51,30 @@ public class InicioActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private PageAdapter pageAdapter;
-    private TabItem tabChats;
-    private TabItem tabStatus;
-    private TabItem tabCalls;
+    private FirebaseAuth mAuth;
+    private TabItem tabTvShow;
+    private TabItem tabMovies;
+    private TabItem tabNextComming;
     private TabItem tabFavoritos;
     private DrawerLayout drawerLayout;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null){
+            cargarPerfil();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_inicio);
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
@@ -70,7 +90,14 @@ public class InicioActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             drawerLayout.closeDrawers();
             switch (menuItem.getItemId()){
-                case R.id.item_login:
+                case R.id.item_loginOut:
+                    LoginManager.getInstance().logOut();
+                    mAuth.signOut();
+                    cargarPerfil();
+                    return true;
+
+
+                case R.id.item_setting:
                     Intent intent=new Intent(InicioActivity.this, SettingActivity.class );
                     startActivity(intent);
                     //reemplazarFragment(recetasFragment);
@@ -92,9 +119,9 @@ public class InicioActivity extends AppCompatActivity {
         });
 
         tabLayout = findViewById(R.id.tablayout);
-        tabChats = findViewById(R.id.tabChats);
-        tabStatus = findViewById(R.id.tabStatus);
-        tabCalls = findViewById(R.id.tabCalls);
+        tabTvShow = findViewById(R.id.tabTvShow);
+        tabMovies = findViewById(R.id.tabMovies);
+        tabNextComming = findViewById(R.id.tabNextComming);
         tabFavoritos=findViewById(R.id.tabFavoritos);
         viewPager = findViewById(R.id.viewPager);
 
@@ -115,7 +142,25 @@ public class InicioActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
 
-                if (tab.getPosition() == 1) {
+                if (tab.getPosition() == 0) {
+                    toolbar.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
+                            R.color.colorGrey));
+                    tabLayout.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
+                            R.color.colorGreyDark));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getWindow().setStatusBarColor(ContextCompat.getColor(InicioActivity.this,
+                                R.color.colorGreyDark));
+                    }
+                    /*toolbar.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
+                            R.color.colorAccent));
+                    tabLayout.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
+                            R.color.colorAccent));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getWindow().setStatusBarColor(ContextCompat.getColor(InicioActivity.this,
+                                R.color.colorAccent));
+                    }*/
+
+                } else if (tab.getPosition() == 1) {
                     toolbar.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
                             R.color.colorGrey));
                     tabLayout.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
@@ -126,16 +171,15 @@ public class InicioActivity extends AppCompatActivity {
                     }
 
                     /*toolbar.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
-                            R.color.colorAccent));
+                            android.R.color.darker_gray));
                     tabLayout.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
-                            R.color.colorAccent));
+                            android.R.color.darker_gray));
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         getWindow().setStatusBarColor(ContextCompat.getColor(InicioActivity.this,
-                                R.color.colorAccent));
+                                android.R.color.darker_gray));
                     }*/
 
-
-                } else if (tab.getPosition() == 2) {
+                }else if (tab.getPosition() == 2) {
                     toolbar.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
                             R.color.colorGrey));
                     tabLayout.setBackgroundColor(ContextCompat.getColor(InicioActivity.this,
@@ -182,6 +226,7 @@ public class InicioActivity extends AppCompatActivity {
             }
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
     }
 
     @Override
@@ -216,7 +261,6 @@ public class InicioActivity extends AppCompatActivity {
         }, getApplicationContext());
     }
 
-
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(Gravity.START)) {
@@ -224,6 +268,12 @@ public class InicioActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void cargarPerfil() {
+        Intent loginActivity = new Intent(InicioActivity.this, LoginActivity.class);
+        startActivity(loginActivity);
+        finish();
     }
 
 }

@@ -12,9 +12,9 @@ import com.phimy.R;
 public class ThemeUtils {
     private static int cTheme;
     public final static int APP = 1;
-    public final static int APP_ALTERNATIVA1 = 0;
-    public final static int APP_ALTERNATIVA2 = 1;
-    public final static int APP_ALTERNATIVA3 = 2;
+    public final static int APP_ALTERNATIVA1 = 1;
+    public final static int APP_ALTERNATIVA2 = 2;
+    public final static int APP_ALTERNATIVA3 = 3;
 
     public static void changeToTheme(Activity activity, int theme) {
         cTheme = theme;
@@ -27,7 +27,12 @@ public class ThemeUtils {
     }
 
     public static void onActivityCreateSetTheme(Activity activity) {
-        switch (cTheme){
+
+        //Preferencia cantidad de columnas
+        String countColumns= DefaultSettings.getListPrefereceThemesValue(activity);
+        int theme = Integer.parseInt(countColumns);
+
+        switch (theme){
             default:
             case APP_ALTERNATIVA1:
                 activity.setTheme(R.style.AppGreyTheme);

@@ -24,6 +24,7 @@ import com.phimy.view.adapter.MovieAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.DefaultSettings;
 import Utils.ResultListener;
 
 /**
@@ -31,15 +32,13 @@ import Utils.ResultListener;
  */
 public class TvFragment extends Fragment implements MovieAdapter.Receptor {
     private ControllerMovieDB controllerMovieDB;
-    private View fragmentMovie;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.fragment_movie, container, false);
-        this.fragmentMovie=view;
+        View view = inflater.inflate(R.layout.fragment_tv, container, false);
 
         this.controllerMovieDB=ControllerMovieDB.getInstance();
         loadRecyclerView(view);
@@ -64,13 +63,18 @@ public class TvFragment extends Fragment implements MovieAdapter.Receptor {
     private void loadRecyclerView(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.movieRecyclerView);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), 2);
+
+        //Preferencia cantidad de columnas
+        String countColumns= DefaultSettings.getListPrefereceValue(view.getContext());
+        int columnas = Integer.parseInt(countColumns);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), columnas);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         Drawable imageFavorito= this.getResources().getDrawable(R.drawable.favoritered);
         Drawable imageNoFavorito= this.getResources().getDrawable(R.drawable.favoritegrey);
-        MovieAdapter adapter = new MovieAdapter(this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
+        MovieAdapter adapter = new MovieAdapter(this.getContext(),this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
                 imageFavorito, imageNoFavorito);
         recyclerView.setAdapter(adapter);
 

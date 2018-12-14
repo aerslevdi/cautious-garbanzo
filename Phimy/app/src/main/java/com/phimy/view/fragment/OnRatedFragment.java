@@ -32,53 +32,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import Utils.DefaultSettings;
 import Utils.ResultListener;
 
 import static android.content.Context.MODE_PRIVATE;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class OnRatedFragment extends Fragment implements MovieAdapter.Receptor{
     private ControllerMovieDB controllerMovieDB;
+    private MovieAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_on_rated, container, false);
-
-//-------------------------------------------------
-        SharedPreferences sharedPrefs1;
-        sharedPrefs1 = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String userSplashValue = sharedPrefs1.getString("settings_columns_values", "4");
-
-        if (userSplashValue.equals ("1")) {
-            // choice 1
-        }
-        else if (userSplashValue.equals("2")) {
-            // choice 2
-        }
-        else if (userSplashValue.equals ("3")){
-            // choice 3
-        }
-
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int pepe1= sharedPrefs.getInt("pref_pref4", 2);
-
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.phimy_preferences", MODE_PRIVATE);
-
-       //SharedPreferences.Editor editor = sharedPreferences.edit();
-       int pepe;
-       pepe = sharedPreferences.getInt("pref_pref4",2);
-
-        // We retrieve foreground and background color value as a string
-        String foregroundColor = sharedPreferences.getString("settings_columns", "2");
-        String Color = sharedPreferences.getString("settings_columns_values", "2");
-//------------------------------------------------
-
         this.controllerMovieDB=ControllerMovieDB.getInstance();
         loadRecyclerView(view);
         return view;
@@ -101,13 +69,18 @@ public class OnRatedFragment extends Fragment implements MovieAdapter.Receptor{
     private void loadRecyclerView(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.movieRecyclerView);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), 2);
+
+        //Preferencia cantidad de columnas
+        String countColumns= DefaultSettings.getListPrefereceValue(view.getContext());
+        int columnas = Integer.parseInt(countColumns);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), columnas);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         Drawable imageFavorito= this.getResources().getDrawable(R.drawable.favoritered);
         Drawable imageNoFavorito= this.getResources().getDrawable(R.drawable.favoritegrey);
-        MovieAdapter adapter = new MovieAdapter(this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
+        MovieAdapter adapter = new MovieAdapter(this.getContext(),this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
                 imageFavorito,imageNoFavorito);
         recyclerView.setAdapter(adapter);
 

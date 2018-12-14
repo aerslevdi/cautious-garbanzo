@@ -26,6 +26,7 @@ import com.phimy.view.adapter.MovieAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.DefaultSettings;
 import Utils.ResultListener;
 
 
@@ -42,7 +43,6 @@ public class MovieFragment extends Fragment implements MovieAdapter.Receptor{
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
-
         this.controllerMovieDB=ControllerMovieDB.getInstance();
         loadRecyclerView(view);
         return view;
@@ -79,13 +79,18 @@ public class MovieFragment extends Fragment implements MovieAdapter.Receptor{
     private void loadRecyclerView(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.movieRecyclerView);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), 3);
+
+        //Preferencia cantidad de columnas
+        String countColumns= DefaultSettings.getListPrefereceValue(view.getContext());
+        int columnas = Integer.parseInt(countColumns);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), columnas);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         Drawable imageFavorito= this.getResources().getDrawable(R.drawable.favoritered);
         Drawable imageNoFavorito= this.getResources().getDrawable(R.drawable.favoritegrey);
-        adapter = new MovieAdapter(this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
+        adapter = new MovieAdapter(this.getContext(),this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
                 imageFavorito,imageNoFavorito);
         recyclerView.setAdapter(adapter);
         loadAdapterData(adapter, view);

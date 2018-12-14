@@ -18,21 +18,24 @@ import android.widget.Toast;
 
 import com.phimy.R;
 import com.phimy.controller.ControllerMovieDB;
+import com.phimy.model.FavoritoDB;
 import com.phimy.model.MovieDB;
 import com.phimy.view.MovieDetalleActivity;
+import com.phimy.view.adapter.FavoritoAdapter;
 import com.phimy.view.adapter.MovieAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.DefaultSettings;
 import Utils.ResultListener;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoritoFragment extends Fragment implements MovieAdapter.Receptor{
+public class FavoritoFragment extends Fragment implements FavoritoAdapter.Receptor{
     private ControllerMovieDB controllerMovieDB;
-    private MovieAdapter adapter;
+    private FavoritoAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,18 +57,6 @@ public class FavoritoFragment extends Fragment implements MovieAdapter.Receptor{
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                adapter.getFilter().filter(s);
-                return false;
-            }
-        });
 
     }
 
@@ -81,32 +72,39 @@ public class FavoritoFragment extends Fragment implements MovieAdapter.Receptor{
     private void loadRecyclerView(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.movieRecyclerView);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), 2);
+
+        //Preferencia cantidad de columnas
+        String countColumns= DefaultSettings.getListPrefereceValue(view.getContext());
+        int columnas = Integer.parseInt(countColumns);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), columnas);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         Drawable imageFavorito= this.getResources().getDrawable(R.drawable.favoritered);
         Drawable imageNoFavorito= this.getResources().getDrawable(R.drawable.favoritegrey);
-        adapter = new MovieAdapter(this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
+
+
+        adapter = new FavoritoAdapter(this.getContext(), this, new ArrayList<FavoritoDB>(), R.layout.movie_cardview,
                 imageFavorito, imageNoFavorito);
         recyclerView.setAdapter(adapter);
         loadAdapterData(adapter, view);
     }
 
-    private void loadAdapterData(final MovieAdapter adapter, View view) {
-        controllerMovieDB.getFavoritos(new ResultListener<List<MovieDB>>() {
+    private void loadAdapterData(final FavoritoAdapter adapter, View view) {
+        controllerMovieDB.getFavoritos(new ResultListener<List<FavoritoDB>>() {
             @Override
-            public void finish(List<MovieDB> result) {
+            public void finish(List<FavoritoDB> result) {
                 adapter.setMovieList(result);
             }
         }, view.getContext());
     }
 
     @Override
-    public void recibir(MovieDB movieDB) {
+    public void recibir(FavoritoDB favoritoDB) {
         Intent intent=new Intent(this.getActivity(), MovieDetalleActivity.class );
         Bundle bundle= new Bundle();
-        bundle.putSerializable(MovieDetalleActivity.KEY_MOVIEDB, movieDB);
+        bundle.putSerializable(MovieDetalleActivity.KEY_MOVIEDB, favoritoDB);
         intent.putExtras(bundle);
         startActivity(intent);
     }

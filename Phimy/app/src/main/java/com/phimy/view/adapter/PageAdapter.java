@@ -22,9 +22,9 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 return new TvFragment();
             case 1:
-                return new OnRatedFragment();
-            case 2:
                 return new MovieFragment();
+            case 2:
+                return new OnRatedFragment();
             case 3:
                 return new FavoritoFragment();
             default:
