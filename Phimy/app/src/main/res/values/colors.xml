@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#373737</color>
+    <color name="colorPrimaryDark">#616161</color>
+    <color name="colorAccent">#CDDC39</color>
+
+    <color name="colorAmber">#ffd149</color>
+    <color name="colorAmberDark">#ffa000</color>
+    <color name="colorAmberAccent">#c67100</color>
+
+    <color name="colorRed">#ad1457</color>
+    <color name="colorRedDark">#78002e</color>
+    <color name="colorRedAccent">#e35183</color>
+
+    <color name="colorNaranja">#f5a616</color>
+    <color name="colorNaranjaDark">#f57354</color>
+    <color name="colorNaranjaAccent">#f9ca73</color>
+
+    <color name="colorAgua">#04c3d9</color>
+    <color name="colorAguaDark">#0392a3</color>
+    <color name="colorAguaAccent">#9be7f0</color>
+
+    <color name="colorPleno">#015073</color>
+    <color name="colorPlenoDark">#f25029</color>
+    <color name="colorPlenoAccent">#f5a616</color>
+
+    <color name="colorGrey">#8e8e8e</color>
+    <color name="colorGreyDark">#373737</color>
+    <color name="colorGreyAccent">#616161</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#F8F8F8</color>
+
+    <color name="colorBackgroundMovie">#212121</color>
+    <color name="colorSplashGreyDark">#494949</color>
+    <color name="colorDrawer">#FF76757C</color>
+
+    <color name="colorFacebook">#039be5</color>
+    <color name="series_titulo">#f5f5f5</color>
+
+
+    <color name="album_titulo">#f5f5f5</color>
+    <color name="bar_bottom_background">#212121</color>
+    <color name="album_background">#262626</color>
+    <color name="busqueda_fondo">#100f0f</color>
+    <color name="mainBackground">#100f0f</color>
+    <color name="bottomBarIcon">#FF9800</color>
+</resources>
