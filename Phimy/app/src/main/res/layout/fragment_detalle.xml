@@ -129,6 +129,7 @@
                         android:textAlignment="center" />
 
                 </RelativeLayout>
+                <!--TODO EXPANDABLE TEXTVIEW-->
                 <com.ms.square.android.expandabletextview.ExpandableTextView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
@@ -152,13 +153,15 @@
                         android:background="@android:color/transparent"/>
                 </com.ms.square.android.expandabletextview.ExpandableTextView>
             </RelativeLayout>
-
+            <!--TODO Agregar ScrollFlag-->
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|snap"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
 
             </android.support.v7.widget.Toolbar>
 

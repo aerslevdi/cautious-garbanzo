@@ -15,7 +15,10 @@ public class MovieDB implements Serializable{
     private String overview;
     private String release_date;
     private Double popularity;
+    private boolean video;
 
+
+    //TODO agregar video boolean
     public String getTitle() {
         return title;
     }
@@ -42,6 +45,10 @@ public class MovieDB implements Serializable{
 
     public Double getPopularity() {
         return popularity;
+    }
+
+    public boolean getVideo() {
+        return video;
     }
 
     @Override
@@ -84,5 +91,9 @@ public class MovieDB implements Serializable{
 
     public void setPopularity(Double popularity) {
         this.popularity = popularity;
+    }
+
+    public void setVideo(boolean video) {
+        this.video = video;
     }
 }

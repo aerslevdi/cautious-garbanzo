@@ -24,6 +24,7 @@ public class MediaActivity extends YouTubeBaseActivity implements YouTubePlayer.
     private MediaPlayer mediaPlayer;
     private SurfaceHolder surfaceHolder;
     public static final String KEY_MOVIEVID = "video";
+    public static final String KEY_SERIEID = "video";
     private String key;
 
     YouTubePlayerView youTubePlayerView;
