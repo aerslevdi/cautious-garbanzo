@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.phimy.R;
 
+import Utils.MusicMediaPlayer;
 import Utils.ThemeUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,5 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ThemeUtils.onViewSetTheme(this);
+
+        MusicMediaPlayer music= MusicMediaPlayer.getInstance();
+        music.startMusic(this);
+
     }
 }

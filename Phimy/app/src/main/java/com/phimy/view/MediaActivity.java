@@ -1,9 +1,7 @@
 package com.phimy.view;
 
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,8 +13,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.phimy.R;
 
-import java.io.IOException;
-
+import Utils.MusicMediaPlayer;
 import Utils.ThemeUtils;
 
 public class MediaActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, YouTubePlayer.PlaybackEventListener{
@@ -26,20 +23,23 @@ public class MediaActivity extends YouTubeBaseActivity implements YouTubePlayer.
     public static final String KEY_MOVIEVID = "video";
     private String key;
 
-    YouTubePlayerView youTubePlayerView;
-    String claveYoutube = "AIzaSyAWSqt1Xz3k4omNxLxIB8z7U56fEoszdSY";
+    private YouTubePlayerView youTubePlayerView;
+    private String claveYoutube = "AIzaSyAWSqt1Xz3k4omNxLxIB8z7U56fEoszdSY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_media);
+
+        ThemeUtils.onViewSetTheme(this);
+        //Detener musica
+        MusicMediaPlayer.getInstance().eliminarMedia();
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         key = bundle.getString(KEY_MOVIEVID);
 
-        youTubePlayerView= (YouTubePlayerView)findViewById(R.id.youtube_view);
+        youTubePlayerView= findViewById(R.id.youtube_view);
         youTubePlayerView.initialize(claveYoutube,this);
     }
 

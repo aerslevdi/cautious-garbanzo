@@ -6,34 +6,25 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.phimy.R;
 import com.phimy.controller.ControllerMovieDB;
 import com.phimy.model.MovieDB;
 import com.phimy.view.MovieDetalleActivity;
-import com.phimy.view.adapter.MovieAdapter;
+import com.phimy.view.adapter.UpComingAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import Utils.DefaultSettings;
 import Utils.ResultListener;
 
-public class UpComingFragment extends Fragment implements MovieAdapter.Receptor {
+public class UpComingFragment extends Fragment implements UpComingAdapter.Receptor {
     private ControllerMovieDB controllerMovieDB;
-    private MovieAdapter adapter;
-
-    public UpComingFragment() {
-        // Required empty public constructor
-    }
+    private UpComingAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,34 +36,6 @@ public class UpComingFragment extends Fragment implements MovieAdapter.Receptor 
         loadRecyclerView(view);
         return view;
     }
-
-    /*@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                adapter.getFilter().filter(s);
-                return false;
-            }
-        });
-    }
-
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_search) {
-            Toast.makeText(getActivity(), "Clicked on " + item.getTitle(), Toast.LENGTH_SHORT)
-                    .show();
-        }
-        return true;
-    }*/
 
     private void loadRecyclerView(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.movieUpComingRecyclerView);
@@ -88,14 +51,14 @@ public class UpComingFragment extends Fragment implements MovieAdapter.Receptor 
 
         Drawable imageFavorito= this.getResources().getDrawable(R.drawable.favoritered);
         Drawable imageNoFavorito= this.getResources().getDrawable(R.drawable.favoritegrey);
-        adapter = new MovieAdapter(this.getContext(),this,
+        adapter = new UpComingAdapter(this.getContext(),this,
                 new ArrayList<MovieDB>(), R.layout.movie_cardview,
                 imageFavorito,imageNoFavorito);
         recyclerView.setAdapter(adapter);
         loadAdapterData(adapter, view);
     }
 
-    private void loadAdapterData(final MovieAdapter adapter, View view) {
+    private void loadAdapterData(final UpComingAdapter adapter, View view) {
         controllerMovieDB.getUpComing(new ResultListener<List<MovieDB>>() {
             @Override
             public void finish(List<MovieDB> result) {
@@ -105,13 +68,24 @@ public class UpComingFragment extends Fragment implements MovieAdapter.Receptor 
     }
 
     @Override
-    public void recibir(MovieDB movieDB, Integer pos, String nameFrag) {
-        Intent intent=new Intent(this.getActivity(), MovieDetalleActivity.class );
+    public void recibir(MovieDB movieDB, Integer pos, List<MovieDB> list, String nameFrag) {
+
+        Intent intent = new Intent(this.getActivity(), MovieDetalleActivity.class);
+        Bundle args = new Bundle();
+        args.putSerializable("ARRAYLIST",(Serializable)list);
+        args.putSerializable(MovieDetalleActivity.KEY_MOVIEDB, movieDB);
+        args.putInt(MovieDetalleActivity.KEY_POS, pos);
+        intent.putExtra("BUNDLE",args);
+        startActivity(intent);
+
+
+        /*Intent intent=new Intent(this.getActivity(), MovieDetalleActivity.class );
         Bundle bundle= new Bundle();
         bundle.putSerializable(MovieDetalleActivity.KEY_MOVIEDB, movieDB);
         bundle.putInt(MovieDetalleActivity.KEY_POS, pos);
-        bundle.putString(MovieDetalleActivity.KEY_NAMEFRAG, "MovieFragment");
+        bundle.putString(MovieDetalleActivity.KEY_NAMEFRAG, nameFrag);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivity(intent);*/
     }
+
 }

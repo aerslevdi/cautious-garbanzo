@@ -198,7 +198,7 @@ public class MovieDBDao extends DaoHelper {
 
     }
 
-    //Elimina del mismo taba de favoritos - Le viene un favorito -
+    //Elimina del mismo tab de favoritos - Le viene un favorito -
     public void removeFavoritosDup(Context context, FavoritoDB favoritoDB){
         //ROOM delete favorito
         FavoritoDAO favoritoDao = DatabaseHelper

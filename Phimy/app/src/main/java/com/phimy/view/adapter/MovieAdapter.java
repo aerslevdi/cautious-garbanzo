@@ -69,18 +69,18 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             public void onClick(View view) {
                 Integer icon= (Integer) movieViewHolder.favoriteImage.getTag();
                     if (icon == KEY_TAG_FAVORITO){
-                    Toast.makeText(view.getContext(), "agregar favoritos" , Toast.LENGTH_SHORT).show();
-                    movieViewHolder.favoriteImage.setCompoundDrawablesWithIntrinsicBounds(imageFavorito,
-                            null, null, null );
-                    movieViewHolder.favoriteImage.setTag(KEY_TAG_NOFAVORITO);
-                    controllerMovieDB.getInstance().addFavoritos(context, movieDB);
-                    notifyDataSetChanged();
-                } else {
-                    Toast.makeText(view.getContext(), "eliminar favoritos" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "eliminar favoritos " + movieDB.getTitle() , Toast.LENGTH_SHORT).show();
                     movieViewHolder.favoriteImage.setCompoundDrawablesWithIntrinsicBounds(imageNoFavorito,
                             null, null, null );
-                    movieViewHolder.favoriteImage.setTag(KEY_TAG_FAVORITO);
+                    movieViewHolder.favoriteImage.setTag(KEY_TAG_NOFAVORITO);
                     controllerMovieDB.getInstance().removeFavoritos(context, movieDB);
+                    notifyDataSetChanged();
+                } else {
+                    Toast.makeText(view.getContext(), "agregar favoritos " + movieDB.getTitle() , Toast.LENGTH_SHORT).show();
+                    movieViewHolder.favoriteImage.setCompoundDrawablesWithIntrinsicBounds(imageFavorito,
+                            null, null, null );
+                    movieViewHolder.favoriteImage.setTag(KEY_TAG_FAVORITO);
+                    controllerMovieDB.getInstance().addFavoritos(context, movieDB);
                     notifyDataSetChanged();
                 }
             }
@@ -116,7 +116,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 @Override
                 public void onClick(View view) {
                     MovieDB movieDB = movieList.get(getAdapterPosition());
-                    receptor.recibir(movieDB, getAdapterPosition(), "nameFrag");
+                    receptor.recibir(movieDB, getAdapterPosition(), movieList, "MovieFragment");
                 }
             });
         }
@@ -134,11 +134,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 //Asigno a todos los no favoritos
                 favoriteImage.setCompoundDrawablesWithIntrinsicBounds(imageFavorito,
                         null, null, null);
-                favoriteImage.setTag(KEY_TAG_NOFAVORITO);
+                favoriteImage.setTag(KEY_TAG_FAVORITO);
             } else{
                 favoriteImage.setCompoundDrawablesWithIntrinsicBounds(imageNoFavorito,
                         null, null, null);
-                favoriteImage.setTag(KEY_TAG_FAVORITO);
+                favoriteImage.setTag(KEY_TAG_NOFAVORITO);
             }
         }
     }
@@ -153,7 +153,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     public interface Receptor{
-        void recibir(MovieDB movieDB, Integer pos, String nameFrag);
+        void recibir(MovieDB movieDB, Integer pos, List<MovieDB> list, String nameFrag);
     }
 
     @Override
@@ -172,12 +172,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
                     filterList= ControllerMovieDB.getInstance().getSearchMovies(filterPattern);
-
-                    /*for (MovieDB movie : movieList){
-                        if(movie.getTitle().toLowerCase().trim().contains(filterPattern)) {
-                            filterList.add(movie);
-                        }
-                    }*/
                 }
                 results.values = filterList;
                 return results;
@@ -191,5 +185,4 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             }
         };
     }
-
 }

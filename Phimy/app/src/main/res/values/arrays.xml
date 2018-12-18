@@ -22,4 +22,18 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+    <string-array name="settings_sonido">
+        <item>Ninguno</item>
+        <item>Epica</item>
+        <item>Pop</item>
+        <item>Aventura</item>
+        <item>Clasica</item>
+    </string-array>
+    <string-array name="settings_sonido_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>

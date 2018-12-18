@@ -20,6 +20,7 @@ import com.phimy.controller.ControllerMovieDB;
 import com.phimy.model.MovieDB;
 import com.phimy.view.MovieDetalleActivity;
 import com.phimy.view.adapter.MovieAdapter;
+import com.phimy.view.adapter.TvAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ import Utils.ResultListener;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TvFragment extends Fragment implements MovieAdapter.Receptor {
+public class TvFragment extends Fragment implements TvAdapter.Receptor {
     private ControllerMovieDB controllerMovieDB;
 
     @Override
@@ -74,14 +75,14 @@ public class TvFragment extends Fragment implements MovieAdapter.Receptor {
 
         Drawable imageFavorito= this.getResources().getDrawable(R.drawable.favoritered);
         Drawable imageNoFavorito= this.getResources().getDrawable(R.drawable.favoritegrey);
-        MovieAdapter adapter = new MovieAdapter(this.getContext(),this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
+        TvAdapter adapter = new TvAdapter(this.getContext(),this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
                 imageFavorito, imageNoFavorito);
         recyclerView.setAdapter(adapter);
 
         loadAdapterData(adapter, view);
     }
 
-    private void loadAdapterData(final MovieAdapter adapter, View view) {
+    private void loadAdapterData(final TvAdapter adapter, View view) {
         controllerMovieDB.getTvMovies(new ResultListener<List<MovieDB>>() {
             @Override
             public void finish(List<MovieDB> result) {
@@ -97,7 +98,7 @@ public class TvFragment extends Fragment implements MovieAdapter.Receptor {
         Bundle bundle= new Bundle();
         bundle.putSerializable(MovieDetalleActivity.KEY_MOVIEDB, movieDB);
         bundle.putInt(MovieDetalleActivity.KEY_POS, pos);
-        bundle.putString(MovieDetalleActivity.KEY_NAMEFRAG, "MovieFragment");
+        bundle.putString(MovieDetalleActivity.KEY_NAMEFRAG, "TvFragment");
         intent.putExtras(bundle);
         startActivity(intent);
     }

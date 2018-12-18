@@ -12,6 +12,21 @@
     </android.support.v7.preference.PreferenceCategory> -->
 
     <android.support.v7.preference.PreferenceCategory
+        android:title="Sonido">
+
+        <ListPreference
+            android:dialogTitle="Seleccionar sonido"
+            android:entries="@array/settings_sonido"
+            android:entryValues="@array/settings_sonido_values"
+            android:key="listPreferenceMusica"
+            android:summary="Click para seleccionar el sonido"
+            android:title="Musica"
+            android:defaultValue="0"/>
+
+    </android.support.v7.preference.PreferenceCategory>
+
+
+    <android.support.v7.preference.PreferenceCategory
         android:title="Pantallas">
 
         <ListPreference

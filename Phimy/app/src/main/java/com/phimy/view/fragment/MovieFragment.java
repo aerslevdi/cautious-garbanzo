@@ -1,6 +1,7 @@
 package com.phimy.view.fragment;
 
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.phimy.view.InicioActivity;
 import com.phimy.view.MovieDetalleActivity;
 import com.phimy.view.adapter.MovieAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,7 @@ import Utils.ResultListener;
 public class MovieFragment extends Fragment implements MovieAdapter.Receptor{
     private ControllerMovieDB controllerMovieDB;
     private MovieAdapter adapter;
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,7 +58,6 @@ public class MovieFragment extends Fragment implements MovieAdapter.Receptor{
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                String pepe= "hola";
                 return false;
             }
 
@@ -90,7 +92,7 @@ public class MovieFragment extends Fragment implements MovieAdapter.Receptor{
 
         Drawable imageFavorito= this.getResources().getDrawable(R.drawable.favoritered);
         Drawable imageNoFavorito= this.getResources().getDrawable(R.drawable.favoritegrey);
-        adapter = new MovieAdapter(this.getContext(),this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
+        this.adapter = new MovieAdapter(this.getContext(),this, new ArrayList<MovieDB>(), R.layout.movie_cardview,
                 imageFavorito,imageNoFavorito);
         recyclerView.setAdapter(adapter);
         loadAdapterData(adapter, view);
@@ -106,13 +108,22 @@ public class MovieFragment extends Fragment implements MovieAdapter.Receptor{
     }
 
     @Override
-    public void recibir(MovieDB movieDB, Integer pos, String nameFrag) {
-        Intent intent=new Intent(this.getActivity(), MovieDetalleActivity.class );
+    public void recibir(MovieDB movieDB, Integer pos, List<MovieDB> list, String nameFrag) {
+
+        Intent intent = new Intent(this.getActivity(), MovieDetalleActivity.class);
+        Bundle args = new Bundle();
+        args.putSerializable("ARRAYLIST",(Serializable)list);
+        args.putSerializable(MovieDetalleActivity.KEY_MOVIEDB, movieDB);
+        args.putInt(MovieDetalleActivity.KEY_POS, pos);
+        intent.putExtra("BUNDLE",args);
+        startActivity(intent);
+
+        /*Intent intent=new Intent(this.getActivity(), MovieDetalleActivity.class );
         Bundle bundle= new Bundle();
         bundle.putSerializable(MovieDetalleActivity.KEY_MOVIEDB, movieDB);
         bundle.putInt(MovieDetalleActivity.KEY_POS, pos);
-        bundle.putString(MovieDetalleActivity.KEY_NAMEFRAG, "MovieFragment");
+        bundle.putString(MovieDetalleActivity.KEY_NAMEFRAG, nameFrag);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 }

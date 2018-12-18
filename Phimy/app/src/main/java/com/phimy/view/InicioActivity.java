@@ -1,9 +1,11 @@
 package com.phimy.view;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -21,8 +23,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.login.LoginManager;
@@ -31,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.phimy.R;
 import com.phimy.controller.ControllerMovieDB;
 import com.phimy.model.MovieDB;
+
 import com.phimy.view.adapter.MovieAdapter;
 import com.phimy.view.adapter.PageAdapter;
 import com.phimy.view.fragment.FavoritoFragment;
@@ -43,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Utils.DefaultSettings;
+import Utils.MusicMediaPlayer;
 import Utils.ResultListener;
 import Utils.ThemeUtils;
 
@@ -57,19 +63,21 @@ public class InicioActivity extends MainActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private PageAdapter pageAdapter;
+    private MovieAdapter movieAdapter;
     private FirebaseAuth mAuth;
     private TabItem tabTvShow;
     private TabItem tabMovies;
     private TabItem tabNowPlaying;
     private TabItem tabUpComing;
     private TabItem tabFavoritos;
+    private SearchView searchView;
     private DrawerLayout drawerLayout;
 
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null){
+        if (currentUser == null) {
             cargarPerfil();
         }
     }
@@ -79,9 +87,7 @@ public class InicioActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-        mAuth= FirebaseAuth.getInstance();
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
-
+        mAuth = FirebaseAuth.getInstance();
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
@@ -95,35 +101,34 @@ public class InicioActivity extends MainActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            drawerLayout.closeDrawers();
-            switch (menuItem.getItemId()){
-                case R.id.item_loginOut:
-                    LoginManager.getInstance().logOut();
-                    mAuth.signOut();
-                    cargarPerfil();
-                    return true;
-                case R.id.item_setting:
-                    Intent intent=new Intent(InicioActivity.this, SettingActivity.class );
-                    startActivity(intent);
-                    return true;
-                case R.id.item_Favoritos:
-                    viewPager.setCurrentItem(3);
-                    return true;
-
-                case R.id.item_about:
-                    Intent intent1=new Intent(InicioActivity.this, MediaActivity.class );
-                    startActivity(intent1);
-                    return true;
-            }
-            return false;
+                drawerLayout.closeDrawers();
+                switch (menuItem.getItemId()) {
+                    case R.id.item_loginOut:
+                        LoginManager.getInstance().logOut();
+                        mAuth.signOut();
+                        cargarPerfil();
+                        return true;
+                    case R.id.item_setting:
+                        Intent intent = new Intent(InicioActivity.this, SettingActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.item_Favoritos:
+                        viewPager.setCurrentItem(3);
+                        return true;
+                    case R.id.item_about:
+                        Intent intent1 = new Intent(InicioActivity.this, MediaActivity.class);
+                        startActivity(intent1);
+                        return true;
+                }
+                return false;
             }
         });
 
         tabLayout = findViewById(R.id.tablayout);
         tabMovies = findViewById(R.id.tabMovies);
-        tabUpComing= findViewById(R.id.tabUpComing);
+        tabUpComing = findViewById(R.id.tabUpComing);
         tabNowPlaying = findViewById(R.id.tabNowPlaying);
-        tabFavoritos=findViewById(R.id.tabFavoritos);
+        tabFavoritos = findViewById(R.id.tabFavoritos);
         tabTvShow = findViewById(R.id.tabTvShow);
         viewPager = findViewById(R.id.viewPager);
 
@@ -136,9 +141,11 @@ public class InicioActivity extends MainActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
@@ -158,25 +165,14 @@ public class InicioActivity extends MainActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*AppBarLayout.OnOffsetChangedListener appBarlistener = new AppBarLayout.OnOffsetChangedListener() {
-        @Override
-        public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-            if (Math.abs(i) - appBarLayout.getTotalScrollRange() == 0) {
-                collapsingToolbarLayout.setTitle("Loves Movies");
-            } else {
-                collapsingToolbarLayout.setTitle("Loves Movies");
-            }
-        }
-    };*/
-
-    private void loadAdapterData(final MovieAdapter adapter) {
+    /*private void loadAdapterData(final MovieAdapter adapter) {
         controllerMovieDB.getMovies(new ResultListener<List<MovieDB>>() {
             @Override
             public void finish(List<MovieDB> result) {
                 adapter.setMovieList(result);
             }
         }, getApplicationContext());
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
@@ -193,8 +189,8 @@ public class InicioActivity extends MainActivity {
         finish();
     }
 
-    public void setColores(){
-        String themesValue= DefaultSettings.getListPrefereceThemesValue(InicioActivity.this);
+    public void setColores() {
+        String themesValue = DefaultSettings.getListPrefereceThemesValue(InicioActivity.this);
         int color = Integer.parseInt(themesValue);
 
         switch (color) {
@@ -234,4 +230,33 @@ public class InicioActivity extends MainActivity {
                 break;
         }
     }
+
+   /* @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(InicioActivity.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                movieAdapter.getDealsFromDb(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                movieAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+
+    }*/
+
+
 }

@@ -32,7 +32,6 @@ public class MovieDetalleActivity extends MainActivity implements DetalleFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detalle);
 
-
         toolbar = findViewById(R.id.toolbarWid);
         toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
@@ -41,28 +40,28 @@ public class MovieDetalleActivity extends MainActivity implements DetalleFragmen
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         Intent intent = getIntent();
-        Bundle intentBundle = intent.getExtras();
-        Object movieObj = intentBundle.getSerializable(KEY_MOVIEDB);
-        String senderFragment = intentBundle.getString(KEY_NAMEFRAG);
-        final Integer posicion = intentBundle.getInt(KEY_POS);
-        final MovieDB movieDB = (MovieDB) movieObj;
-        controllerMovieDB = new ControllerMovieDB();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        ArrayList<MovieDB> listMovies = (ArrayList<MovieDB>) args.getSerializable("ARRAYLIST");
+        Object movieObj = args.getSerializable(KEY_MOVIEDB);
+        String senderFragment = args.getString(KEY_NAMEFRAG);
+        final Integer posicion = args.getInt(KEY_POS);
 
+
+        final MovieDB movieDB = (MovieDB) movieObj;
+        //controllerMovieDB = new ControllerMovieDB();
         detalleFragment = new DetalleFragment();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(detalleFragment.KEY_MOVIEDBFR, movieDB);
         detalleFragment.setArguments(bundle);
 
-
         final SliderAdapter adapter = new SliderAdapter(getSupportFragmentManager(), movieData);
-
-        String holaaaaa = "TvFragment";
         final ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
+        adapter.setDatos(listMovies);
         viewPager.setCurrentItem(posicion);
 
-        if (senderFragment.equals(holaaaaa)) {
+        /*if (senderFragment.equals("UpComingFragment")) {
             controllerMovieDB.getTvMovies(new ResultListener<List<MovieDB>>() {
                 @Override
                 public void finish(List<MovieDB> result) {
@@ -87,6 +86,22 @@ public class MovieDetalleActivity extends MainActivity implements DetalleFragmen
                     viewPager.setCurrentItem(posicion);
                 }
             }, this);
+        }  else if (senderFragment == "TvFragment") {
+            controllerMovieDB.getMovies(new ResultListener<List<MovieDB>>() {
+                @Override
+                public void finish(List<MovieDB> result) {
+                    adapter.setDatos(result);
+                    viewPager.setCurrentItem(posicion);
+                }
+            }, this);
+        } else if (senderFragment == "FavoritoFragment") {
+            controllerMovieDB.getMovies(new ResultListener<List<MovieDB>>() {
+                @Override
+                public void finish(List<MovieDB> result) {
+                    adapter.setDatos(result);
+                    viewPager.setCurrentItem(posicion);
+                }
+            }, this);
         } else {
             controllerMovieDB.getNowPlaying(new ResultListener<List<MovieDB>>() {
                 @Override
@@ -95,11 +110,8 @@ public class MovieDetalleActivity extends MainActivity implements DetalleFragmen
                     viewPager.setCurrentItem(posicion);
                 }
             }, this);
-        }
-
+        }*/
     }
-
-
 
     @Override
     public void recibirVideo(String key) {

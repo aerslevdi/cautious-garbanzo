@@ -22,11 +22,11 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new MovieFragment();
+                return new MovieFragment();//popular
             case 1:
-                return new OnRatedFragment();
+                return new UpComingFragment();//upcoming
             case 2:
-                return new UpComingFragment();
+                return new OnRatedFragment(); //Now playing
             case 3:
                 return new FavoritoFragment();
             case 4:

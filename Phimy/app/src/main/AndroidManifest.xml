@@ -42,7 +42,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.InicioActivity" />
+        <activity android:name=".view.InicioActivity" >
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.MovieDetalleActivity" />
         <activity android:name=".view.MediaActivity" />
         <activity

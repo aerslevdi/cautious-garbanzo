@@ -8,22 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.phimy.R;
 import com.phimy.controller.ControllerMovieDB;
 import com.phimy.helper.ItemTouchHelperAdapter;
 import com.phimy.model.FavoritoDB;
-import com.phimy.model.MasterMovie;
-import com.phimy.model.MovieDB;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class FavoritoAdapter extends RecyclerView.Adapter<FavoritoAdapter.MovieViewHolder> implements ItemTouchHelperAdapter {
@@ -71,7 +63,7 @@ public class FavoritoAdapter extends RecyclerView.Adapter<FavoritoAdapter.MovieV
                     controllerMovieDB.getInstance().addFavoritosDup(context, favoritoDB);
                     notifyDataSetChanged();*/
                 } else {
-                    Toast.makeText(view.getContext(), "eliminar favoritos" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "eliminar favoritos "  + favoritoDB.getTitle(), Toast.LENGTH_SHORT).show();
                     movieViewHolder.favoriteImage.setCompoundDrawablesWithIntrinsicBounds(imageNoFavorito,
                             null, null, null );
                     movieViewHolder.favoriteImage.setTag(KEY_TAG_FAVORITO);
@@ -94,8 +86,7 @@ public class FavoritoAdapter extends RecyclerView.Adapter<FavoritoAdapter.MovieV
     }
 
     @Override
-    public void onItemDismiss(int position) {
-    }
+    public void onItemDismiss(int position) {}
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         private ImageView movieImage;
@@ -115,7 +106,7 @@ public class FavoritoAdapter extends RecyclerView.Adapter<FavoritoAdapter.MovieV
                 @Override
                 public void onClick(View view) {
                     FavoritoDB favoritoDB = favoritoList.get(getAdapterPosition());
-                    receptor.recibir(favoritoDB);
+                    receptor.recibir(favoritoDB, getAdapterPosition(), "nameFrag");
                 }
             });
         }
@@ -138,7 +129,6 @@ public class FavoritoAdapter extends RecyclerView.Adapter<FavoritoAdapter.MovieV
     }
 
     public interface Receptor{
-        void recibir(FavoritoDB favoritoDB);
+        void recibir(FavoritoDB favoritoDB, Integer pos, String nameFrag);
     }
-
 }

@@ -36,6 +36,14 @@ public class DefaultSettings {
         return sharedPreferences.getString("listPreferenceColumnas", "2");
     }
 
+
+    // Tipo de Musica
+    public static String getListPrefereceMusicValue(Context context) {
+        getSharedPreferencesInstance(context);
+        return sharedPreferences.getString("listPreferenceMusica", "0");
+    }
+
+
     // for list preference
     // remember list preference will return entryValues, that means,
     // values are strings

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Utils.ResultListener;
+import Utils.ThemeUtils;
 
 
 public class DetalleFragment extends Fragment {
@@ -67,6 +68,8 @@ public class DetalleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle, container, false);
+
+        ThemeUtils.onViewSetTheme(this.getActivity());
 
         final DetalleAdapter actorAdapter = new DetalleAdapter(casting);
 
